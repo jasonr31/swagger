@@ -1,0 +1,4725 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "K2 for Microsoft Teams",
+    "description": "TODO: Add Description",
+    "contact": {}
+  },
+  "host": "graph.microsoft.com",
+  "basePath": "/v1.0",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/groups": {
+      "post": {
+        "description": "This creates an Office 365 Group without any memebers.\t",
+        "summary": "Create Group",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "Create Group",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateGroup"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+                "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+                "deletedDateTime": null,
+                "classification": null,
+                "createdDateTime": "2019-05-01T17:55:37Z",
+                "creationOptions": [],
+                "description": "Development Research Team",
+                "displayName": "Dev Team",
+                "groupTypes": [
+                  "Unified"
+                ],
+                "mail": "devteam@k2rocks.onmicrosoft.com",
+                "mailEnabled": true,
+                "mailNickname": "devteam",
+                "onPremisesLastSyncDateTime": null,
+                "onPremisesSecurityIdentifier": null,
+                "onPremisesSyncEnabled": null,
+                "preferredDataLocation": null,
+                "proxyAddresses": [
+                  "SMTP:devteam@k2rocks.onmicrosoft.com"
+                ],
+                "renewedDateTime": "2019-05-01T17:55:37Z",
+                "resourceBehaviorOptions": [],
+                "resourceProvisioningOptions": [],
+                "securityEnabled": false,
+                "visibility": "Public",
+                "onPremisesProvisioningErrors": []
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Location": {
+                "type": "string",
+                "default": "https://graph.microsoft.com/v2/7233b38c-175e-44dd-835d-ae3a87121080/directoryObjects/4ab574b6-bbc6-4a47-8059-40fa698deb08/Microsoft.DirectoryServices.Group"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "66c44299-a42a-4e34-83bd-b6ae55aff46d"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "66c44299-a42a-4e34-83bd-b6ae55aff46d"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"003\",\"RoleInstance\":\"AGSFE_IN_3\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "256.7495"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Wed, 01 May 2019 17:55:36 GMT"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Lists the groups in an organization along with a value that can be checked to determine if the Group has an associated team.\t",
+        "summary": "List of Groups",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "List Groups",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListofGroups"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups(id,resourceProvisioningOptions)",
+                "value": [
+                  {
+                    "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+                    "resourceProvisioningOptions": [
+                      "Team"
+                    ]
+                  },
+                  {
+                    "id": "78769486-853f-4dbd-b37f-b15f904ba5d9",
+                    "resourceProvisioningOptions": [
+                      "Team"
+                    ]
+                  },
+                  {
+                    "id": "93ab9f4b-f930-42b7-b212-0798116c29ef",
+                    "resourceProvisioningOptions": []
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "a206fe27-fafe-4254-b529-e48e831dcda9"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "a206fe27-fafe-4254-b529-e48e831dcda9"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"West US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_9\",\"ADSiteName\":\"WUS\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "283.449"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Wed, 22 May 2019 16:16:56 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{groupID}/team": {
+      "put": {
+        "description": "Create a new team under a group.",
+        "summary": "Add Team to Group",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "Add Team to Group",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "groupID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddTeamRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddTeamtoGroup"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams/$entity",
+                "id": "78769486-853f-4dbd-b37f-b15f904ba5d9",
+                "internalId": "19:b75dc4135b4f4ad8bdbfd2f435a7e01a@thread.skype",
+                "webUrl": "https://teams.microsoft.com/l/team/19:b75dc4135b4f4ad8bdbfd2f435a7e01a%40thread.skype/conversations?groupId=78769486-853f-4dbd-b37f-b15f904ba5d9&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+                "discoverySettings": null,
+                "isArchived": null,
+                "memberSettings": {
+                  "allowCreateUpdateChannels": true,
+                  "allowDeleteChannels": true,
+                  "allowAddRemoveApps": true,
+                  "allowCreateUpdateRemoveTabs": true,
+                  "allowCreateUpdateRemoveConnectors": true
+                },
+                "guestSettings": {
+                  "allowCreateUpdateChannels": false,
+                  "allowDeleteChannels": false
+                },
+                "messagingSettings": {
+                  "allowUserEditMessages": true,
+                  "allowUserDeleteMessages": true,
+                  "allowOwnerDeleteMessages": true,
+                  "allowTeamMentions": true,
+                  "allowChannelMentions": true
+                },
+                "funSettings": {
+                  "allowGiphy": true,
+                  "giphyContentRating": "moderate",
+                  "allowStickersAndMemes": true,
+                  "allowCustomMemes": true
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Location": {
+                "type": "string",
+                "default": "https://api.teams.skype.com/v1.0/groups('78769486-853f-4dbd-b37f-b15f904ba5d9')/team('78769486-853f-4dbd-b37f-b15f904ba5d9')"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "02c72380-d144-4847-8d4b-683dff0ee995"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "02c72380-d144-4847-8d4b-683dff0ee995"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"002\",\"RoleInstance\":\"AGSFE_IN_5\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "2954.7742"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 17:11:26 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{teamID}/owners/$ref": {
+      "post": {
+        "description": "Add a user to be the owner of a team. Teams can have multiple owners. Owners must also be added as member of a team.",
+        "summary": "Add Owner To Team",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "Add Owner To Team",
+        "deprecated": false,
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddOwnerToTeamRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Content-Length": {
+                "type": "string",
+                "default": "0"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "58d33544-c43f-4a93-8ff8-70a2be0e37fe"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "58d33544-c43f-4a93-8ff8-70a2be0e37fe"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"4\",\"ScaleUnit\":\"000\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "630.2623"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 15:39:45 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{teamID}/members/$ref": {
+      "post": {
+        "description": "Add a user to be a member of a team.",
+        "summary": "Add Member to Team",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "Add Member to Team",
+        "deprecated": false,
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddMembertoTeamRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Content-Length": {
+                "type": "string",
+                "default": "0"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "68716ab6-6251-41c4-9d63-aa5ee9a215e6"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "68716ab6-6251-41c4-9d63-aa5ee9a215e6"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_5\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "139.3104"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 15:47:32 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamID}": {
+      "get": {
+        "description": "Get the properties of a Team By ID\t",
+        "summary": "Get Team",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "Get Team",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TeamFullDetail"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams/$entity",
+                "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+                "internalId": "19:557cc6fd93134835a90dd88b099087cf@thread.skype",
+                "webUrl": "https://teams.microsoft.com/l/team/19:557cc6fd93134835a90dd88b099087cf%40thread.skype/conversations?groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+                "isArchived": false,
+                "memberSettings": {
+                  "allowCreateUpdateChannels": true,
+                  "allowDeleteChannels": true,
+                  "allowAddRemoveApps": true,
+                  "allowCreateUpdateRemoveTabs": true,
+                  "allowCreateUpdateRemoveConnectors": true
+                },
+                "guestSettings": {
+                  "allowCreateUpdateChannels": false,
+                  "allowDeleteChannels": false
+                },
+                "messagingSettings": {
+                  "allowUserEditMessages": true,
+                  "allowUserDeleteMessages": true,
+                  "allowOwnerDeleteMessages": true,
+                  "allowTeamMentions": true,
+                  "allowChannelMentions": true
+                },
+                "funSettings": {
+                  "allowGiphy": true,
+                  "giphyContentRating": "moderate",
+                  "allowStickersAndMemes": true,
+                  "allowCustomMemes": true
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "4f13185f-cadc-44a0-8836-c720b120c3db"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "4f13185f-cadc-44a0-8836-c720b120c3db"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "278.4616"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Wed, 01 May 2019 18:29:16 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{teamID}/members": {
+      "get": {
+        "description": "List the members of a Group/Team\t",
+        "summary": "List Team Members",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "List Team Members",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListTeamMembers"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+                "value": [
+                  {
+                    "@odata.type": "#microsoft.graph.user",
+                    "id": "1e8289d8-9f73-49a4-92b5-875328fd3ba9",
+                    "businessPhones": [],
+                    "displayName": "Holly Anderson",
+                    "givenName": "Holly",
+                    "jobTitle": null,
+                    "mail": "holly@k2rocks.com",
+                    "mobilePhone": null,
+                    "officeLocation": null,
+                    "preferredLanguage": null,
+                    "surname": "Anderson",
+                    "userPrincipalName": "holly@k2rocks.com"
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "5de9636e-cc06-4832-9301-d0b073f2c695"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "5de9636e-cc06-4832-9301-d0b073f2c695"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"002\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "53.6546"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Thu, 11 Jul 2019 05:36:30 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/joinedTeams": {
+      "get": {
+        "description": "Get the teams of the logged in user",
+        "summary": "List My Teams",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "List My Teams",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetMyTeams"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups",
+                "value": [
+                  {
+                    "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+                    "displayName": "Dev Team",
+                    "description": "Development Research Team",
+                    "isArchived": false
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "bb160c37-3fc5-4393-bf04-945095661f6f"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "bb160c37-3fc5-4393-bf04-945095661f6f"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"4\",\"ScaleUnit\":\"000\",\"RoleInstance\":\"AGSFE_IN_1\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "132.8874"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 15:23:31 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userID}/joinedTeams": {
+      "get": {
+        "description": "Show a list of all the teams that a user is currently a member.",
+        "summary": "List Teams for User",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "List Teams for User",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetTeamsforUser"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups",
+                "value": [
+                  {
+                    "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+                    "displayName": "Dev Team",
+                    "description": "Development Research Team",
+                    "isArchived": false
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "191a6813-94fd-407b-97a7-cb63cbeb51c8"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "191a6813-94fd-407b-97a7-cb63cbeb51c8"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_5\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "151.0244"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 15:31:32 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{teamID}/owners": {
+      "get": {
+        "description": "List all the owners of a team.",
+        "summary": "List Team Owners",
+        "tags": [
+          "Teams"
+        ],
+        "operationId": "List Team Owners",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetTeamOwners"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+                "value": [
+                  {
+                    "@odata.type": "#microsoft.graph.user",
+                    "id": "008f4ee5-0ec4-41fa-97dd-80c1a4a99caf",
+                    "deletedDateTime": null,
+                    "accountEnabled": true,
+                    "ageGroup": null,
+                    "businessPhones": [
+                      "4250000000"
+                    ],
+                    "city": null,
+                    "companyName": null,
+                    "consentProvidedForMinor": null,
+                    "country": null,
+                    "createdDateTime": "2019-03-19T20:41:29Z",
+                    "department": null,
+                    "displayName": "Scott Pitman",
+                    "employeeId": null,
+                    "faxNumber": null,
+                    "givenName": "Scott",
+                    "jobTitle": null,
+                    "legalAgeGroupClassification": null,
+                    "mail": "k2productstrategy@k2rocks.onmicrosoft.com",
+                    "mailNickname": "k2productstrategy",
+                    "mobilePhone": null,
+                    "onPremisesDistinguishedName": null,
+                    "onPremisesDomainName": null,
+                    "onPremisesImmutableId": null,
+                    "onPremisesLastSyncDateTime": null,
+                    "onPremisesSecurityIdentifier": null,
+                    "onPremisesSamAccountName": null,
+                    "onPremisesSyncEnabled": null,
+                    "onPremisesUserPrincipalName": null,
+                    "otherMails": [
+                      "scottp@k2.com"
+                    ],
+                    "passwordPolicies": null,
+                    "passwordProfile": null,
+                    "officeLocation": null,
+                    "postalCode": null,
+                    "preferredLanguage": "en-US",
+                    "proxyAddresses": [
+                      "SMTP:k2productstrategy@k2rocks.onmicrosoft.com"
+                    ],
+                    "refreshTokensValidFromDateTime": "2019-03-19T20:41:29Z",
+                    "imAddresses": [
+                      "k2productstrategy@k2rocks.onmicrosoft.com"
+                    ],
+                    "isResourceAccount": null,
+                    "showInAddressList": null,
+                    "signInSessionsValidFromDateTime": "2019-03-19T20:41:29Z",
+                    "state": null,
+                    "streetAddress": null,
+                    "surname": "Pitman",
+                    "usageLocation": "US",
+                    "userPrincipalName": "k2productstrategy@k2rocks.onmicrosoft.com",
+                    "userType": "Member",
+                    "assignedLicenses": [
+                      {
+                        "disabledPlans": [],
+                        "skuId": "189a915c-fe4f-4ffa-bde4-85b9628d07a0"
+                      }
+                    ],
+                    "assignedPlans": [
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "SharePoint",
+                        "servicePlanId": "a361d6e2-509e-4e25-a8ad-950060064ef4"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "SharePoint",
+                        "servicePlanId": "527f7cdd-0e86-4c47-b879-f5fd357a3ac6"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "exchange",
+                        "servicePlanId": "efb87545-963c-4e0d-99df-69c6916d9eb0"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "MicrosoftCommunicationsOnline",
+                        "servicePlanId": "0feaeb32-d00e-4d66-bd5a-43b5b83db82c"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "MicrosoftOffice",
+                        "servicePlanId": "43de0ff5-c92c-492b-9116-175376d08c38"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "Sway",
+                        "servicePlanId": "a23b959c-7ce8-4e57-9140-b90eb88a9e97"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "ProjectWorkManagement",
+                        "servicePlanId": "b737dad2-2f6c-4c65-90e3-ca563267e8b9"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "TeamspaceAPI",
+                        "servicePlanId": "57ff2da0-773e-42df-b2af-ffb7a2317929"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "PowerAppsService",
+                        "servicePlanId": "c68f8d98-5534-41c8-bf36-22fa496fa792"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "ProcessSimple",
+                        "servicePlanId": "76846ad7-7776-4c40-a281-a386362dd1b9"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "MicrosoftStream",
+                        "servicePlanId": "6c6042f5-6f01-4d67-b8c1-eb99d36eed3e"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "OfficeForms",
+                        "servicePlanId": "e212cbc7-0961-4c40-9825-01117710dcb1"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:35Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "To-Do",
+                        "servicePlanId": "3fb82609-8c27-4f7b-bd51-30634711ee67"
+                      }
+                    ],
+                    "onPremisesProvisioningErrors": [],
+                    "onPremisesExtensionAttributes": {
+                      "extensionAttribute1": null,
+                      "extensionAttribute2": null,
+                      "extensionAttribute3": null,
+                      "extensionAttribute4": null,
+                      "extensionAttribute5": null,
+                      "extensionAttribute6": null,
+                      "extensionAttribute7": null,
+                      "extensionAttribute8": null,
+                      "extensionAttribute9": null,
+                      "extensionAttribute10": null,
+                      "extensionAttribute11": null,
+                      "extensionAttribute12": null,
+                      "extensionAttribute13": null,
+                      "extensionAttribute14": null,
+                      "extensionAttribute15": null
+                    },
+                    "provisionedPlans": [
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "exchange"
+                      },
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "MicrosoftCommunicationsOnline"
+                      },
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "SharePoint"
+                      },
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "SharePoint"
+                      }
+                    ]
+                  },
+                  {
+                    "@odata.type": "#microsoft.graph.user",
+                    "id": "625c3e99-c685-447d-8b92-51f5c73c3ad5",
+                    "deletedDateTime": null,
+                    "accountEnabled": true,
+                    "ageGroup": null,
+                    "businessPhones": [],
+                    "city": null,
+                    "companyName": null,
+                    "consentProvidedForMinor": null,
+                    "country": null,
+                    "createdDateTime": "2019-03-19T20:50:18Z",
+                    "department": null,
+                    "displayName": "Jason Trent",
+                    "employeeId": null,
+                    "faxNumber": null,
+                    "givenName": "Jason",
+                    "jobTitle": null,
+                    "legalAgeGroupClassification": null,
+                    "mail": "jason@k2rocks.com",
+                    "mailNickname": "jason",
+                    "mobilePhone": null,
+                    "onPremisesDistinguishedName": null,
+                    "onPremisesDomainName": null,
+                    "onPremisesImmutableId": null,
+                    "onPremisesLastSyncDateTime": null,
+                    "onPremisesSecurityIdentifier": null,
+                    "onPremisesSamAccountName": null,
+                    "onPremisesSyncEnabled": null,
+                    "onPremisesUserPrincipalName": null,
+                    "otherMails": [],
+                    "passwordPolicies": "None",
+                    "passwordProfile": null,
+                    "officeLocation": null,
+                    "postalCode": null,
+                    "preferredLanguage": null,
+                    "proxyAddresses": [
+                      "smtp:jason@k2rocks.onmicrosoft.com",
+                      "SMTP:jason@k2rocks.com"
+                    ],
+                    "refreshTokensValidFromDateTime": "2019-03-19T20:50:18Z",
+                    "imAddresses": [
+                      "jason@k2rocks.com"
+                    ],
+                    "isResourceAccount": null,
+                    "showInAddressList": null,
+                    "signInSessionsValidFromDateTime": "2019-03-19T20:50:18Z",
+                    "state": null,
+                    "streetAddress": null,
+                    "surname": "Trent",
+                    "usageLocation": "US",
+                    "userPrincipalName": "jason@k2rocks.com",
+                    "userType": "Member",
+                    "assignedLicenses": [
+                      {
+                        "disabledPlans": [],
+                        "skuId": "189a915c-fe4f-4ffa-bde4-85b9628d07a0"
+                      }
+                    ],
+                    "assignedPlans": [
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "SharePoint",
+                        "servicePlanId": "a361d6e2-509e-4e25-a8ad-950060064ef4"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "SharePoint",
+                        "servicePlanId": "527f7cdd-0e86-4c47-b879-f5fd357a3ac6"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "exchange",
+                        "servicePlanId": "efb87545-963c-4e0d-99df-69c6916d9eb0"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "MicrosoftCommunicationsOnline",
+                        "servicePlanId": "0feaeb32-d00e-4d66-bd5a-43b5b83db82c"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "MicrosoftOffice",
+                        "servicePlanId": "43de0ff5-c92c-492b-9116-175376d08c38"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "Sway",
+                        "servicePlanId": "a23b959c-7ce8-4e57-9140-b90eb88a9e97"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "ProjectWorkManagement",
+                        "servicePlanId": "b737dad2-2f6c-4c65-90e3-ca563267e8b9"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "TeamspaceAPI",
+                        "servicePlanId": "57ff2da0-773e-42df-b2af-ffb7a2317929"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "PowerAppsService",
+                        "servicePlanId": "c68f8d98-5534-41c8-bf36-22fa496fa792"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "ProcessSimple",
+                        "servicePlanId": "76846ad7-7776-4c40-a281-a386362dd1b9"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "MicrosoftStream",
+                        "servicePlanId": "6c6042f5-6f01-4d67-b8c1-eb99d36eed3e"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "OfficeForms",
+                        "servicePlanId": "e212cbc7-0961-4c40-9825-01117710dcb1"
+                      },
+                      {
+                        "assignedDateTime": "2019-03-19T20:50:18Z",
+                        "capabilityStatus": "Enabled",
+                        "service": "To-Do",
+                        "servicePlanId": "3fb82609-8c27-4f7b-bd51-30634711ee67"
+                      }
+                    ],
+                    "onPremisesProvisioningErrors": [],
+                    "onPremisesExtensionAttributes": {
+                      "extensionAttribute1": null,
+                      "extensionAttribute2": null,
+                      "extensionAttribute3": null,
+                      "extensionAttribute4": null,
+                      "extensionAttribute5": null,
+                      "extensionAttribute6": null,
+                      "extensionAttribute7": null,
+                      "extensionAttribute8": null,
+                      "extensionAttribute9": null,
+                      "extensionAttribute10": null,
+                      "extensionAttribute11": null,
+                      "extensionAttribute12": null,
+                      "extensionAttribute13": null,
+                      "extensionAttribute14": null,
+                      "extensionAttribute15": null
+                    },
+                    "provisionedPlans": [
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "exchange"
+                      },
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "MicrosoftCommunicationsOnline"
+                      },
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "SharePoint"
+                      },
+                      {
+                        "capabilityStatus": "Enabled",
+                        "provisioningStatus": "Success",
+                        "service": "SharePoint"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "fe92e572-70bc-494e-813e-b5a06331dd04"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "fe92e572-70bc-494e-813e-b5a06331dd04"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"4\",\"ScaleUnit\":\"000\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "199.8486"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 15:41:18 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamID}/channels/{channelID}/tabs": {
+      "get": {
+        "description": "List all the tabs in a team channel.",
+        "summary": "List Tabs for Channel",
+        "tags": [
+          "Tabs"
+        ],
+        "operationId": "List Channel Tabs",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "channelID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListTabsforChannel"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels('19%3A5836677d74f84fc4bcdf9f07e0492658%40thread.skype')/tabs",
+                "value": [
+                  {
+                    "id": "8c09cfe7-80ee-4da5-b959-9c5ab6de290f",
+                    "displayName": "Wiki",
+                    "webUrl": "https://teams.microsoft.com/l/channel/19%3a5836677d74f84fc4bcdf9f07e0492658%40thread.skype/tab%3a%3a00f0de6b-f59e-4f7a-813f-3a911d3d7c9b?label=Wiki&groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+                    "configuration": {
+                      "entityId": null,
+                      "contentUrl": null,
+                      "removeUrl": null,
+                      "websiteUrl": null,
+                      "wikiTabId": 1,
+                      "wikiDefaultTab": true,
+                      "hasContent": false
+                    }
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "51e5c39c-a004-48f7-9a71-42efd0772fc5"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "51e5c39c-a004-48f7-9a71-42efd0772fc5"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_1\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "1218.2158"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:41:29 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamID}/channels/{channelID}/tabs/{tabID}": {
+      "get": {
+        "description": "Get a specific tab in a team channel.",
+        "summary": "Get Tab for Channel",
+        "tags": [
+          "Tabs"
+        ],
+        "operationId": "Get Channel Tab",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "channelID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "tabID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetTabforChannel"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels('19%3A5836677d74f84fc4bcdf9f07e0492658%40thread.skype')/tabs/$entity",
+                "id": "8c09cfe7-80ee-4da5-b959-9c5ab6de290f",
+                "displayName": "Wiki",
+                "webUrl": "https://teams.microsoft.com/l/channel/19%3a5836677d74f84fc4bcdf9f07e0492658%40thread.skype/tab%3a%3a00f0de6b-f59e-4f7a-813f-3a911d3d7c9b?label=Wiki&groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+                "configuration": {
+                  "entityId": null,
+                  "contentUrl": null,
+                  "removeUrl": null,
+                  "websiteUrl": null,
+                  "wikiTabId": 1,
+                  "wikiDefaultTab": true,
+                  "hasContent": false
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "f3e0aa7e-4414-4fce-a262-aaadb1003fe5"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "f3e0aa7e-4414-4fce-a262-aaadb1003fe5"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_1\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "692.8522"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:43:35 GMT"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Remove a tabs from a team channel.",
+        "summary": "Delete Tab from Channel",
+        "tags": [
+          "Tabs"
+        ],
+        "operationId": "Delete Channel Tab",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "channelID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "tabID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/{TeamID}/channels/{ChannelID}/tabs": {
+      "post": {
+        "description": "Add Tab to Channel",
+        "summary": "Add Tab to Channel",
+        "tags": [
+          "Tabs"
+        ],
+        "operationId": "Add Tab",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "TeamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "ChannelID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddTabtoChannelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddTabtoChannel"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels('19%3A5836677d74f84fc4bcdf9f07e0492658%40thread.skype')/tabs/$entity",
+                "id": "46aed70d-cb1d-4ce2-8e2f-c23c889d687b",
+                "displayName": "My Contoso Tab",
+                "webUrl": "https://teams.microsoft.com/l/channel/19%3a5836677d74f84fc4bcdf9f07e0492658%40thread.skype/tab%3a%3a9d49387b-3ebe-46d9-b92f-88b6e4148ddd?label=My+Contoso+Tab&groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+                "configuration": {
+                  "entityId": null,
+                  "contentUrl": null,
+                  "removeUrl": null,
+                  "websiteUrl": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamID}/channels": {
+      "post": {
+        "description": "TODO: Add Description",
+        "summary": "Add a Channel to a Team",
+        "tags": [
+          "Channels"
+        ],
+        "operationId": "Add Team Channel",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddaChanneltoaTeamRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddaChanneltoaTeam"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels/$entity",
+                "id": "19:29d5dfa34fe04cb291e35d8bcb6dc10c@thread.skype",
+                "displayName": "Innovation Discussion",
+                "description": "This channel is where we debate all future innovation plans",
+                "email": "",
+                "webUrl": "https://teams.microsoft.com/l/channel/19%3a29d5dfa34fe04cb291e35d8bcb6dc10c%40thread.skype/Innovation+Discussion?groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080"
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Location": {
+                "type": "string",
+                "default": "https://api.teams.skype.com/v1.0/teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels('19:29d5dfa34fe04cb291e35d8bcb6dc10c@thread.skype')"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "1692e8d4-ec88-4397-97d7-1e3545c65a5f"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "1692e8d4-ec88-4397-97d7-1e3545c65a5f"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_4\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "1987.8572"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:24:26 GMT"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "List all the channels in a team",
+        "summary": "List Channels for a Team",
+        "tags": [
+          "Channels"
+        ],
+        "operationId": "List Team Channels",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListChannelsforaTeam"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels",
+                "value": [
+                  {
+                    "id": "19:557cc6fd93134835a90dd88b099087cf@thread.skype",
+                    "displayName": "General",
+                    "description": "Development Research Team",
+                    "email": "",
+                    "webUrl": "https://teams.microsoft.com/l/channel/19%3a557cc6fd93134835a90dd88b099087cf%40thread.skype/General?groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080"
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "a73dcab2-0ff3-4bcc-b426-1e736512a479"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "a73dcab2-0ff3-4bcc-b426-1e736512a479"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "345.9548"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:29:46 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamID}/channels/{channelID}": {
+      "delete": {
+        "description": "Delete a channel from a team.",
+        "summary": "Delete Channel from Team",
+        "tags": [
+          "Channels"
+        ],
+        "operationId": "Delete Team Channel",
+        "deprecated": false,
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Team ID"
+          },
+          {
+            "name": "channelID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Content-Length": {
+                "type": "string",
+                "default": "0"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "ed30bed4-2cc6-4b92-8d80-7793c697f8cc"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "ed30bed4-2cc6-4b92-8d80-7793c697f8cc"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "481.2685"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:28:03 GMT"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update the channel name and/or description",
+        "summary": "Update Channel",
+        "tags": [
+          "Channels"
+        ],
+        "operationId": "Update Channel",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "channelID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateChannelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/groups/{teamID}/members/{memberID}/$ref": {
+      "delete": {
+        "description": "Remove a member from a team.",
+        "summary": "Remove Member From Team",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Remove Team Member",
+        "deprecated": false,
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "memberID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of member to remove"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Content-Length": {
+                "type": "string",
+                "default": "0"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "a791f978-def9-4688-aae8-d2f4423b90ef"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "a791f978-def9-4688-aae8-d2f4423b90ef"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"West US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"002\",\"RoleInstance\":\"AGSFE_IN_5\",\"ADSiteName\":\"WUS\"}}"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "203.2801"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:00:34 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{teamID}/owners/{ownerID}/$ref": {
+      "delete": {
+        "description": "User to remove as an owner of the team",
+        "summary": "Remove Owner From Team",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Remove Team Owner",
+        "deprecated": false,
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "ownerID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID of owner to remove"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Content-Length": {
+                "type": "string",
+                "default": "0"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "c845101a-680e-4c1c-af22-e3c30a97a500"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "c845101a-680e-4c1c-af22-e3c30a97a500"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "155.5757"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:03:43 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{groupID}": {
+      "delete": {
+        "description": "Delete a team enabled group.",
+        "summary": "Delete Group",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Delete Group",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "groupID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of Group to Delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/teams/{teamID}/archive": {
+      "post": {
+        "description": "Archive a team.",
+        "summary": "Archive Team",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Archive Team",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the Team to Archive"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/{archiveJobLocation}": {
+      "get": {
+        "description": "Get the status of a team archive/unarchive request.",
+        "summary": "Check Team Archive Status",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Check Team Acrhive Status",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "archiveJobLocation",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CheckTeamArchiveStatus"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/operations/$entity",
+                "id": "e38411ee-270b-4106-8b4c-23271a9421d0",
+                "operationType": "archiveTeam",
+                "createdDateTime": "2019-05-21T16:09:33.6632793Z",
+                "status": "succeeded",
+                "lastActionDateTime": "2019-05-21T16:09:34.4913791Z",
+                "attemptsCount": 1,
+                "targetResourceId": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+                "targetResourceLocation": "/teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')",
+                "error": null,
+                "Value": "{\"Status\":1,\"PreArchivalMembersPermission\":0}"
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "0b466aa1-3aa2-485d-ba88-1d57d573d25b"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "0b466aa1-3aa2-485d-ba88-1d57d573d25b"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"002\",\"RoleInstance\":\"AGSFE_IN_6\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "731.2143"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:10:47 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamID}/unarchive": {
+      "post": {
+        "description": "Unarchive a previously archived team and return it to active status.",
+        "summary": "Unarchive Team",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Unarchive Team",
+        "deprecated": false,
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "teamID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Location": {
+                "type": "string",
+                "default": "/teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/operations('42c9dbac-5d0d-43b2-855c-11717452c363')"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "e03e83f0-51b7-4a40-95bf-d2f128397506"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "e03e83f0-51b7-4a40-95bf-d2f128397506"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"002\",\"RoleInstance\":\"AGSFE_IN_6\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "1385.6104"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Tue, 21 May 2019 16:12:52 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/directory/deletedItems/{groupID}": {
+      "get": {
+        "description": "Retrieve a previously deleted team enabled group.",
+        "summary": "Get Deleted Group",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Get Deleted Group",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "groupID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of Deleted Group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/directory/deletedItems/{groupID}/restore": {
+      "post": {
+        "description": "Restore a previously deleted group.",
+        "summary": "Restore Deleted Group",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Restore Deleted Group",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "groupID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/users/{userIDorPrincipalName}": {
+      "get": {
+        "description": "Retrieve a user by the id or principal name.",
+        "summary": "Get User",
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Get User",
+        "deprecated": false,
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "userIDorPrincipalName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetUserbyPrincipalName"
+            },
+            "examples": {
+              "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+                "businessPhones": [],
+                "displayName": "Jason Trent",
+                "givenName": "Jason",
+                "jobTitle": null,
+                "mail": "jason@k2rocks.com",
+                "mobilePhone": null,
+                "officeLocation": null,
+                "preferredLanguage": null,
+                "surname": "Trent",
+                "userPrincipalName": "jason@k2rocks.com",
+                "id": "625c3e99-c685-447d-8b92-51f5c73c3ad5"
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "default": "private"
+              },
+              "Transfer-Encoding": {
+                "type": "string",
+                "default": "chunked"
+              },
+              "Content-Encoding": {
+                "type": "string",
+                "default": "gzip"
+              },
+              "Vary": {
+                "type": "string",
+                "default": "Accept-Encoding"
+              },
+              "request-id": {
+                "type": "string",
+                "default": "767b1a15-cb6d-41dd-9e18-f5bacb97742c"
+              },
+              "client-request-id": {
+                "type": "string",
+                "default": "767b1a15-cb6d-41dd-9e18-f5bacb97742c"
+              },
+              "x-ms-ags-diagnostic": {
+                "type": "string",
+                "default": "{\"ServerInfo\":{\"DataCenter\":\"South Central US\",\"Slice\":\"SliceC\",\"Ring\":\"5\",\"ScaleUnit\":\"001\",\"RoleInstance\":\"AGSFE_IN_2\",\"ADSiteName\":\"SCU\"}}"
+              },
+              "OData-Version": {
+                "type": "string",
+                "default": "4.0"
+              },
+              "Duration": {
+                "type": "string",
+                "default": "244.4614"
+              },
+              "Strict-Transport-Security": {
+                "type": "string",
+                "default": "max-age=31536000"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Wed, 22 May 2019 18:29:44 GMT"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateGroupRequest": {
+      "title": "CreateGroupRequest",
+      "example": {
+        "description": "We are the new Team",
+        "displayName": "New Team",
+        "groupTypes": [
+          "Unified"
+        ],
+        "mailEnabled": true,
+        "mailNickname": "newteam",
+        "securityEnabled": false
+      },
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "groupTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mailEnabled": {
+          "type": "boolean"
+        },
+        "mailNickname": {
+          "type": "string"
+        },
+        "securityEnabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "description",
+        "displayName",
+        "groupTypes",
+        "mailEnabled",
+        "mailNickname",
+        "securityEnabled"
+      ]
+    },
+    "CreateGroup": {
+      "title": "CreateGroup",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+        "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+        "deletedDateTime": null,
+        "classification": null,
+        "createdDateTime": "2019-05-01T17:55:37Z",
+        "creationOptions": [],
+        "description": "Development Research Team",
+        "displayName": "Dev Team",
+        "groupTypes": [
+          "Unified"
+        ],
+        "mail": "devteam@k2rocks.onmicrosoft.com",
+        "mailEnabled": true,
+        "mailNickname": "devteam",
+        "onPremisesLastSyncDateTime": null,
+        "onPremisesSecurityIdentifier": null,
+        "onPremisesSyncEnabled": null,
+        "preferredDataLocation": null,
+        "proxyAddresses": [
+          "SMTP:devteam@k2rocks.onmicrosoft.com"
+        ],
+        "renewedDateTime": "2019-05-01T17:55:37Z",
+        "resourceBehaviorOptions": [],
+        "resourceProvisioningOptions": [],
+        "securityEnabled": false,
+        "visibility": "Public",
+        "onPremisesProvisioningErrors": []
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "deletedDateTime": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string"
+        },
+        "creationOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "groupTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mail": {
+          "type": "string"
+        },
+        "mailEnabled": {
+          "type": "boolean"
+        },
+        "mailNickname": {
+          "type": "string"
+        },
+        "onPremisesLastSyncDateTime": {
+          "type": "string"
+        },
+        "onPremisesSecurityIdentifier": {
+          "type": "string"
+        },
+        "onPremisesSyncEnabled": {
+          "type": "string"
+        },
+        "preferredDataLocation": {
+          "type": "string"
+        },
+        "proxyAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "renewedDateTime": {
+          "type": "string"
+        },
+        "resourceBehaviorOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceProvisioningOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "securityEnabled": {
+          "type": "boolean"
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "onPremisesProvisioningErrors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "id",
+        "createdDateTime",
+        "creationOptions",
+        "description",
+        "displayName",
+        "groupTypes",
+        "mail",
+        "mailEnabled",
+        "mailNickname",
+        "proxyAddresses",
+        "renewedDateTime",
+        "resourceBehaviorOptions",
+        "resourceProvisioningOptions",
+        "securityEnabled",
+        "visibility",
+        "onPremisesProvisioningErrors"
+      ]
+    },
+    "AddTeamtoGroup": {
+      "title": "AddTeamtoGroup",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams/$entity",
+        "id": "78769486-853f-4dbd-b37f-b15f904ba5d9",
+        "internalId": "19:b75dc4135b4f4ad8bdbfd2f435a7e01a@thread.skype",
+        "webUrl": "https://teams.microsoft.com/l/team/19:b75dc4135b4f4ad8bdbfd2f435a7e01a%40thread.skype/conversations?groupId=78769486-853f-4dbd-b37f-b15f904ba5d9&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+        "discoverySettings": null,
+        "isArchived": null,
+        "memberSettings": {
+          "allowCreateUpdateChannels": true,
+          "allowDeleteChannels": true,
+          "allowAddRemoveApps": true,
+          "allowCreateUpdateRemoveTabs": true,
+          "allowCreateUpdateRemoveConnectors": true
+        },
+        "guestSettings": {
+          "allowCreateUpdateChannels": false,
+          "allowDeleteChannels": false
+        },
+        "messagingSettings": {
+          "allowUserEditMessages": true,
+          "allowUserDeleteMessages": true,
+          "allowOwnerDeleteMessages": true,
+          "allowTeamMentions": true,
+          "allowChannelMentions": true
+        },
+        "funSettings": {
+          "allowGiphy": true,
+          "giphyContentRating": "moderate",
+          "allowStickersAndMemes": true,
+          "allowCustomMemes": true
+        }
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "internalId": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        },
+        "discoverySettings": {
+          "type": "string"
+        },
+        "isArchived": {
+          "type": "string"
+        },
+        "memberSettings": {
+          "$ref": "#/definitions/MemberSettings"
+        },
+        "guestSettings": {
+          "$ref": "#/definitions/GuestSettings"
+        },
+        "messagingSettings": {
+          "$ref": "#/definitions/MessagingSettings"
+        },
+        "funSettings": {
+          "$ref": "#/definitions/FunSettings"
+        }
+      },
+      "required": [
+        "@odata.context",
+        "id",
+        "internalId",
+        "webUrl",
+        "memberSettings",
+        "guestSettings",
+        "messagingSettings",
+        "funSettings"
+      ]
+    },
+    "MemberSettings": {
+      "title": "MemberSettings",
+      "example": {
+        "allowCreateUpdateChannels": true,
+        "allowDeleteChannels": true,
+        "allowAddRemoveApps": true,
+        "allowCreateUpdateRemoveTabs": true,
+        "allowCreateUpdateRemoveConnectors": true
+      },
+      "type": "object",
+      "properties": {
+        "allowCreateUpdateChannels": {
+          "type": "boolean"
+        },
+        "allowDeleteChannels": {
+          "type": "boolean"
+        },
+        "allowAddRemoveApps": {
+          "type": "boolean"
+        },
+        "allowCreateUpdateRemoveTabs": {
+          "type": "boolean"
+        },
+        "allowCreateUpdateRemoveConnectors": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "allowCreateUpdateChannels",
+        "allowDeleteChannels",
+        "allowAddRemoveApps",
+        "allowCreateUpdateRemoveTabs",
+        "allowCreateUpdateRemoveConnectors"
+      ]
+    },
+    "GuestSettings": {
+      "title": "GuestSettings",
+      "example": {
+        "allowCreateUpdateChannels": false,
+        "allowDeleteChannels": false
+      },
+      "type": "object",
+      "properties": {
+        "allowCreateUpdateChannels": {
+          "type": "boolean"
+        },
+        "allowDeleteChannels": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "allowCreateUpdateChannels",
+        "allowDeleteChannels"
+      ]
+    },
+    "MessagingSettings": {
+      "title": "MessagingSettings",
+      "example": {
+        "allowUserEditMessages": true,
+        "allowUserDeleteMessages": true,
+        "allowOwnerDeleteMessages": true,
+        "allowTeamMentions": true,
+        "allowChannelMentions": true
+      },
+      "type": "object",
+      "properties": {
+        "allowUserEditMessages": {
+          "type": "boolean"
+        },
+        "allowUserDeleteMessages": {
+          "type": "boolean"
+        },
+        "allowOwnerDeleteMessages": {
+          "type": "boolean"
+        },
+        "allowTeamMentions": {
+          "type": "boolean"
+        },
+        "allowChannelMentions": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "allowUserEditMessages",
+        "allowUserDeleteMessages",
+        "allowOwnerDeleteMessages",
+        "allowTeamMentions",
+        "allowChannelMentions"
+      ]
+    },
+    "FunSettings": {
+      "title": "FunSettings",
+      "example": {
+        "allowGiphy": true,
+        "giphyContentRating": "moderate",
+        "allowStickersAndMemes": true,
+        "allowCustomMemes": true
+      },
+      "type": "object",
+      "properties": {
+        "allowGiphy": {
+          "type": "boolean"
+        },
+        "giphyContentRating": {
+          "type": "string"
+        },
+        "allowStickersAndMemes": {
+          "type": "boolean"
+        },
+        "allowCustomMemes": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "allowGiphy",
+        "giphyContentRating",
+        "allowStickersAndMemes",
+        "allowCustomMemes"
+      ]
+    },
+    "AddOwnerToTeamRequest": {
+      "title": "AddOwnerToTeamRequest",
+      "example": {
+        "@odata.id": "https://graph.microsoft.com/beta/users/{625c3e99-c685-447d-8b92-51f5c73c3ad5}"
+      },
+      "type": "object",
+      "properties": {
+        "@odata.id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.id"
+      ]
+    },
+    "AddMembertoTeamRequest": {
+      "title": "AddMembertoTeamRequest",
+      "example": {
+        "@odata.id": "https://graph.microsoft.com/beta/users/{1e8289d8-9f73-49a4-92b5-875328fd3ba9}"
+      },
+      "type": "object",
+      "properties": {
+        "@odata.id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.id"
+      ]
+    },
+    "ListofGroups": {
+      "title": "ListofGroups",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups(id,resourceProvisioningOptions)",
+        "value": [
+          {
+            "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+            "resourceProvisioningOptions": [
+              "Team"
+            ]
+          },
+          {
+            "id": "78769486-853f-4dbd-b37f-b15f904ba5d9",
+            "resourceProvisioningOptions": [
+              "Team"
+            ]
+          },
+          {
+            "id": "93ab9f4b-f930-42b7-b212-0798116c29ef",
+            "resourceProvisioningOptions": []
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Group"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "value"
+      ]
+    },
+    "Group": {
+      "title": "Group",
+      "example": {
+        "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+        "resourceProvisioningOptions": [
+          "Team"
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "resourceProvisioningOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "resourceProvisioningOptions"
+      ]
+    },
+    "TeamFullDetail": {
+      "title": "TeamFullDetail",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams/$entity",
+        "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+        "internalId": "19:557cc6fd93134835a90dd88b099087cf@thread.skype",
+        "webUrl": "https://teams.microsoft.com/l/team/19:557cc6fd93134835a90dd88b099087cf%40thread.skype/conversations?groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+        "isArchived": false,
+        "memberSettings": {
+          "allowCreateUpdateChannels": true,
+          "allowDeleteChannels": true,
+          "allowAddRemoveApps": true,
+          "allowCreateUpdateRemoveTabs": true,
+          "allowCreateUpdateRemoveConnectors": true
+        },
+        "guestSettings": {
+          "allowCreateUpdateChannels": false,
+          "allowDeleteChannels": false
+        },
+        "messagingSettings": {
+          "allowUserEditMessages": true,
+          "allowUserDeleteMessages": true,
+          "allowOwnerDeleteMessages": true,
+          "allowTeamMentions": true,
+          "allowChannelMentions": true
+        },
+        "funSettings": {
+          "allowGiphy": true,
+          "giphyContentRating": "moderate",
+          "allowStickersAndMemes": true,
+          "allowCustomMemes": true
+        }
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "internalId": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        },
+        "isArchived": {
+          "type": "boolean"
+        },
+        "memberSettings": {
+          "$ref": "#/definitions/MemberSettings"
+        },
+        "guestSettings": {
+          "$ref": "#/definitions/GuestSettings"
+        },
+        "messagingSettings": {
+          "$ref": "#/definitions/MessagingSettings"
+        },
+        "funSettings": {
+          "$ref": "#/definitions/FunSettings"
+        }
+      },
+      "required": [
+        "@odata.context",
+        "id",
+        "internalId",
+        "webUrl",
+        "isArchived",
+        "memberSettings",
+        "guestSettings",
+        "messagingSettings",
+        "funSettings"
+      ]
+    },
+    "ListTeamMembers": {
+      "title": "ListTeamMembers",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+        "value": [
+          {
+            "@odata.type": "#microsoft.graph.user",
+            "id": "1e8289d8-9f73-49a4-92b5-875328fd3ba9",
+            "businessPhones": [],
+            "displayName": "Holly Anderson",
+            "givenName": "Holly",
+            "jobTitle": null,
+            "mail": "holly@k2rocks.com",
+            "mobilePhone": null,
+            "officeLocation": null,
+            "preferredLanguage": null,
+            "surname": "Anderson",
+            "userPrincipalName": "holly@k2rocks.com"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MemberOwner"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "value"
+      ]
+    },
+    "MemberOwner": {
+      "title": "MemberOwner",
+      "example": {
+        "@odata.type": "#microsoft.graph.user",
+        "id": "1e8289d8-9f73-49a4-92b5-875328fd3ba9",
+        "businessPhones": [],
+        "displayName": "Holly Anderson",
+        "givenName": "Holly",
+        "jobTitle": null,
+        "mail": "holly@k2rocks.com",
+        "mobilePhone": null,
+        "officeLocation": null,
+        "preferredLanguage": null,
+        "surname": "Anderson",
+        "userPrincipalName": "holly@k2rocks.com"
+      },
+      "type": "object",
+      "properties": {
+        "@odata.type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "businessPhones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "givenName": {
+          "type": "string"
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "mail": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        },
+        "officeLocation": {
+          "type": "string"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.type",
+        "id",
+        "businessPhones",
+        "displayName",
+        "givenName",
+        "mail",
+        "surname",
+        "userPrincipalName"
+      ]
+    },
+    "GetMyTeams": {
+      "title": "GetMyTeams",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups",
+        "value": [
+          {
+            "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+            "displayName": "Dev Team",
+            "description": "Development Research Team",
+            "isArchived": false
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Team"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "value"
+      ]
+    },
+    "Team": {
+      "title": "Team",
+      "example": {
+        "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+        "displayName": "Dev Team",
+        "description": "Development Research Team",
+        "isArchived": false
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isArchived": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "description",
+        "isArchived"
+      ]
+    },
+    "GetTeamsforUser": {
+      "title": "GetTeamsforUser",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups",
+        "value": [
+          {
+            "id": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+            "displayName": "Dev Team",
+            "description": "Development Research Team",
+            "isArchived": false
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Team"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "value"
+      ]
+    },
+    "GetTeamOwners": {
+      "title": "GetTeamOwners",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects",
+        "value": [
+          {
+            "@odata.type": "#microsoft.graph.user",
+            "id": "008f4ee5-0ec4-41fa-97dd-80c1a4a99caf",
+            "deletedDateTime": null,
+            "accountEnabled": true,
+            "ageGroup": null,
+            "businessPhones": [
+              "4250000000"
+            ],
+            "city": null,
+            "companyName": null,
+            "consentProvidedForMinor": null,
+            "country": null,
+            "createdDateTime": "2019-03-19T20:41:29Z",
+            "department": null,
+            "displayName": "Scott Pitman",
+            "employeeId": null,
+            "faxNumber": null,
+            "givenName": "Scott",
+            "jobTitle": null,
+            "legalAgeGroupClassification": null,
+            "mail": "k2productstrategy@k2rocks.onmicrosoft.com",
+            "mailNickname": "k2productstrategy",
+            "mobilePhone": null,
+            "onPremisesDistinguishedName": null,
+            "onPremisesDomainName": null,
+            "onPremisesImmutableId": null,
+            "onPremisesLastSyncDateTime": null,
+            "onPremisesSecurityIdentifier": null,
+            "onPremisesSamAccountName": null,
+            "onPremisesSyncEnabled": null,
+            "onPremisesUserPrincipalName": null,
+            "otherMails": [
+              "scottp@k2.com"
+            ],
+            "passwordPolicies": null,
+            "passwordProfile": null,
+            "officeLocation": null,
+            "postalCode": null,
+            "preferredLanguage": "en-US",
+            "proxyAddresses": [
+              "SMTP:k2productstrategy@k2rocks.onmicrosoft.com"
+            ],
+            "refreshTokensValidFromDateTime": "2019-03-19T20:41:29Z",
+            "imAddresses": [
+              "k2productstrategy@k2rocks.onmicrosoft.com"
+            ],
+            "isResourceAccount": null,
+            "showInAddressList": null,
+            "signInSessionsValidFromDateTime": "2019-03-19T20:41:29Z",
+            "state": null,
+            "streetAddress": null,
+            "surname": "Pitman",
+            "usageLocation": "US",
+            "userPrincipalName": "k2productstrategy@k2rocks.onmicrosoft.com",
+            "userType": "Member",
+            "assignedLicenses": [
+              {
+                "disabledPlans": [],
+                "skuId": "189a915c-fe4f-4ffa-bde4-85b9628d07a0"
+              }
+            ],
+            "assignedPlans": [
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "SharePoint",
+                "servicePlanId": "a361d6e2-509e-4e25-a8ad-950060064ef4"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "SharePoint",
+                "servicePlanId": "527f7cdd-0e86-4c47-b879-f5fd357a3ac6"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "exchange",
+                "servicePlanId": "efb87545-963c-4e0d-99df-69c6916d9eb0"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "MicrosoftCommunicationsOnline",
+                "servicePlanId": "0feaeb32-d00e-4d66-bd5a-43b5b83db82c"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "MicrosoftOffice",
+                "servicePlanId": "43de0ff5-c92c-492b-9116-175376d08c38"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "Sway",
+                "servicePlanId": "a23b959c-7ce8-4e57-9140-b90eb88a9e97"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "ProjectWorkManagement",
+                "servicePlanId": "b737dad2-2f6c-4c65-90e3-ca563267e8b9"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "TeamspaceAPI",
+                "servicePlanId": "57ff2da0-773e-42df-b2af-ffb7a2317929"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "PowerAppsService",
+                "servicePlanId": "c68f8d98-5534-41c8-bf36-22fa496fa792"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "ProcessSimple",
+                "servicePlanId": "76846ad7-7776-4c40-a281-a386362dd1b9"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "MicrosoftStream",
+                "servicePlanId": "6c6042f5-6f01-4d67-b8c1-eb99d36eed3e"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "OfficeForms",
+                "servicePlanId": "e212cbc7-0961-4c40-9825-01117710dcb1"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:35Z",
+                "capabilityStatus": "Enabled",
+                "service": "To-Do",
+                "servicePlanId": "3fb82609-8c27-4f7b-bd51-30634711ee67"
+              }
+            ],
+            "onPremisesProvisioningErrors": [],
+            "onPremisesExtensionAttributes": {
+              "extensionAttribute1": null,
+              "extensionAttribute2": null,
+              "extensionAttribute3": null,
+              "extensionAttribute4": null,
+              "extensionAttribute5": null,
+              "extensionAttribute6": null,
+              "extensionAttribute7": null,
+              "extensionAttribute8": null,
+              "extensionAttribute9": null,
+              "extensionAttribute10": null,
+              "extensionAttribute11": null,
+              "extensionAttribute12": null,
+              "extensionAttribute13": null,
+              "extensionAttribute14": null,
+              "extensionAttribute15": null
+            },
+            "provisionedPlans": [
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "exchange"
+              },
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "MicrosoftCommunicationsOnline"
+              },
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "SharePoint"
+              },
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "SharePoint"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#microsoft.graph.user",
+            "id": "625c3e99-c685-447d-8b92-51f5c73c3ad5",
+            "deletedDateTime": null,
+            "accountEnabled": true,
+            "ageGroup": null,
+            "businessPhones": [],
+            "city": null,
+            "companyName": null,
+            "consentProvidedForMinor": null,
+            "country": null,
+            "createdDateTime": "2019-03-19T20:50:18Z",
+            "department": null,
+            "displayName": "Jason Trent",
+            "employeeId": null,
+            "faxNumber": null,
+            "givenName": "Jason",
+            "jobTitle": null,
+            "legalAgeGroupClassification": null,
+            "mail": "jason@k2rocks.com",
+            "mailNickname": "jason",
+            "mobilePhone": null,
+            "onPremisesDistinguishedName": null,
+            "onPremisesDomainName": null,
+            "onPremisesImmutableId": null,
+            "onPremisesLastSyncDateTime": null,
+            "onPremisesSecurityIdentifier": null,
+            "onPremisesSamAccountName": null,
+            "onPremisesSyncEnabled": null,
+            "onPremisesUserPrincipalName": null,
+            "otherMails": [],
+            "passwordPolicies": "None",
+            "passwordProfile": null,
+            "officeLocation": null,
+            "postalCode": null,
+            "preferredLanguage": null,
+            "proxyAddresses": [
+              "smtp:jason@k2rocks.onmicrosoft.com",
+              "SMTP:jason@k2rocks.com"
+            ],
+            "refreshTokensValidFromDateTime": "2019-03-19T20:50:18Z",
+            "imAddresses": [
+              "jason@k2rocks.com"
+            ],
+            "isResourceAccount": null,
+            "showInAddressList": null,
+            "signInSessionsValidFromDateTime": "2019-03-19T20:50:18Z",
+            "state": null,
+            "streetAddress": null,
+            "surname": "Trent",
+            "usageLocation": "US",
+            "userPrincipalName": "jason@k2rocks.com",
+            "userType": "Member",
+            "assignedLicenses": [
+              {
+                "disabledPlans": [],
+                "skuId": "189a915c-fe4f-4ffa-bde4-85b9628d07a0"
+              }
+            ],
+            "assignedPlans": [
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "SharePoint",
+                "servicePlanId": "a361d6e2-509e-4e25-a8ad-950060064ef4"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "SharePoint",
+                "servicePlanId": "527f7cdd-0e86-4c47-b879-f5fd357a3ac6"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "exchange",
+                "servicePlanId": "efb87545-963c-4e0d-99df-69c6916d9eb0"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "MicrosoftCommunicationsOnline",
+                "servicePlanId": "0feaeb32-d00e-4d66-bd5a-43b5b83db82c"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "MicrosoftOffice",
+                "servicePlanId": "43de0ff5-c92c-492b-9116-175376d08c38"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "Sway",
+                "servicePlanId": "a23b959c-7ce8-4e57-9140-b90eb88a9e97"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "ProjectWorkManagement",
+                "servicePlanId": "b737dad2-2f6c-4c65-90e3-ca563267e8b9"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "TeamspaceAPI",
+                "servicePlanId": "57ff2da0-773e-42df-b2af-ffb7a2317929"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "PowerAppsService",
+                "servicePlanId": "c68f8d98-5534-41c8-bf36-22fa496fa792"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "ProcessSimple",
+                "servicePlanId": "76846ad7-7776-4c40-a281-a386362dd1b9"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "MicrosoftStream",
+                "servicePlanId": "6c6042f5-6f01-4d67-b8c1-eb99d36eed3e"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "OfficeForms",
+                "servicePlanId": "e212cbc7-0961-4c40-9825-01117710dcb1"
+              },
+              {
+                "assignedDateTime": "2019-03-19T20:50:18Z",
+                "capabilityStatus": "Enabled",
+                "service": "To-Do",
+                "servicePlanId": "3fb82609-8c27-4f7b-bd51-30634711ee67"
+              }
+            ],
+            "onPremisesProvisioningErrors": [],
+            "onPremisesExtensionAttributes": {
+              "extensionAttribute1": null,
+              "extensionAttribute2": null,
+              "extensionAttribute3": null,
+              "extensionAttribute4": null,
+              "extensionAttribute5": null,
+              "extensionAttribute6": null,
+              "extensionAttribute7": null,
+              "extensionAttribute8": null,
+              "extensionAttribute9": null,
+              "extensionAttribute10": null,
+              "extensionAttribute11": null,
+              "extensionAttribute12": null,
+              "extensionAttribute13": null,
+              "extensionAttribute14": null,
+              "extensionAttribute15": null
+            },
+            "provisionedPlans": [
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "exchange"
+              },
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "MicrosoftCommunicationsOnline"
+              },
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "SharePoint"
+              },
+              {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "SharePoint"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "value"
+      ]
+    },
+    "User": {
+      "title": "User",
+      "example": {
+        "@odata.type": "#microsoft.graph.user",
+        "id": "008f4ee5-0ec4-41fa-97dd-80c1a4a99caf",
+        "deletedDateTime": null,
+        "accountEnabled": true,
+        "ageGroup": null,
+        "businessPhones": [
+          "4250000000"
+        ],
+        "city": null,
+        "companyName": null,
+        "consentProvidedForMinor": null,
+        "country": null,
+        "createdDateTime": "2019-03-19T20:41:29Z",
+        "department": null,
+        "displayName": "Scott Pitman",
+        "employeeId": null,
+        "faxNumber": null,
+        "givenName": "Scott",
+        "jobTitle": null,
+        "legalAgeGroupClassification": null,
+        "mail": "k2productstrategy@k2rocks.onmicrosoft.com",
+        "mailNickname": "k2productstrategy",
+        "mobilePhone": null,
+        "onPremisesDistinguishedName": null,
+        "onPremisesDomainName": null,
+        "onPremisesImmutableId": null,
+        "onPremisesLastSyncDateTime": null,
+        "onPremisesSecurityIdentifier": null,
+        "onPremisesSamAccountName": null,
+        "onPremisesSyncEnabled": null,
+        "onPremisesUserPrincipalName": null,
+        "otherMails": [
+          "scottp@k2.com"
+        ],
+        "passwordPolicies": null,
+        "passwordProfile": null,
+        "officeLocation": null,
+        "postalCode": null,
+        "preferredLanguage": "en-US",
+        "proxyAddresses": [
+          "SMTP:k2productstrategy@k2rocks.onmicrosoft.com"
+        ],
+        "refreshTokensValidFromDateTime": "2019-03-19T20:41:29Z",
+        "imAddresses": [
+          "k2productstrategy@k2rocks.onmicrosoft.com"
+        ],
+        "isResourceAccount": null,
+        "showInAddressList": null,
+        "signInSessionsValidFromDateTime": "2019-03-19T20:41:29Z",
+        "state": null,
+        "streetAddress": null,
+        "surname": "Pitman",
+        "usageLocation": "US",
+        "userPrincipalName": "k2productstrategy@k2rocks.onmicrosoft.com",
+        "userType": "Member",
+        "assignedLicenses": [
+          {
+            "disabledPlans": [],
+            "skuId": "189a915c-fe4f-4ffa-bde4-85b9628d07a0"
+          }
+        ],
+        "assignedPlans": [
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "SharePoint",
+            "servicePlanId": "a361d6e2-509e-4e25-a8ad-950060064ef4"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "SharePoint",
+            "servicePlanId": "527f7cdd-0e86-4c47-b879-f5fd357a3ac6"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "exchange",
+            "servicePlanId": "efb87545-963c-4e0d-99df-69c6916d9eb0"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "MicrosoftCommunicationsOnline",
+            "servicePlanId": "0feaeb32-d00e-4d66-bd5a-43b5b83db82c"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "MicrosoftOffice",
+            "servicePlanId": "43de0ff5-c92c-492b-9116-175376d08c38"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "Sway",
+            "servicePlanId": "a23b959c-7ce8-4e57-9140-b90eb88a9e97"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "ProjectWorkManagement",
+            "servicePlanId": "b737dad2-2f6c-4c65-90e3-ca563267e8b9"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "TeamspaceAPI",
+            "servicePlanId": "57ff2da0-773e-42df-b2af-ffb7a2317929"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "PowerAppsService",
+            "servicePlanId": "c68f8d98-5534-41c8-bf36-22fa496fa792"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "ProcessSimple",
+            "servicePlanId": "76846ad7-7776-4c40-a281-a386362dd1b9"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "MicrosoftStream",
+            "servicePlanId": "6c6042f5-6f01-4d67-b8c1-eb99d36eed3e"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "OfficeForms",
+            "servicePlanId": "e212cbc7-0961-4c40-9825-01117710dcb1"
+          },
+          {
+            "assignedDateTime": "2019-03-19T20:50:35Z",
+            "capabilityStatus": "Enabled",
+            "service": "To-Do",
+            "servicePlanId": "3fb82609-8c27-4f7b-bd51-30634711ee67"
+          }
+        ],
+        "onPremisesProvisioningErrors": [],
+        "onPremisesExtensionAttributes": {
+          "extensionAttribute1": null,
+          "extensionAttribute2": null,
+          "extensionAttribute3": null,
+          "extensionAttribute4": null,
+          "extensionAttribute5": null,
+          "extensionAttribute6": null,
+          "extensionAttribute7": null,
+          "extensionAttribute8": null,
+          "extensionAttribute9": null,
+          "extensionAttribute10": null,
+          "extensionAttribute11": null,
+          "extensionAttribute12": null,
+          "extensionAttribute13": null,
+          "extensionAttribute14": null,
+          "extensionAttribute15": null
+        },
+        "provisionedPlans": [
+          {
+            "capabilityStatus": "Enabled",
+            "provisioningStatus": "Success",
+            "service": "exchange"
+          },
+          {
+            "capabilityStatus": "Enabled",
+            "provisioningStatus": "Success",
+            "service": "MicrosoftCommunicationsOnline"
+          },
+          {
+            "capabilityStatus": "Enabled",
+            "provisioningStatus": "Success",
+            "service": "SharePoint"
+          },
+          {
+            "capabilityStatus": "Enabled",
+            "provisioningStatus": "Success",
+            "service": "SharePoint"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "deletedDateTime": {
+          "type": "string"
+        },
+        "accountEnabled": {
+          "type": "boolean"
+        },
+        "ageGroup": {
+          "type": "string"
+        },
+        "businessPhones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "city": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "consentProvidedForMinor": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "employeeId": {
+          "type": "string"
+        },
+        "faxNumber": {
+          "type": "string"
+        },
+        "givenName": {
+          "type": "string"
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "legalAgeGroupClassification": {
+          "type": "string"
+        },
+        "mail": {
+          "type": "string"
+        },
+        "mailNickname": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        },
+        "onPremisesDistinguishedName": {
+          "type": "string"
+        },
+        "onPremisesDomainName": {
+          "type": "string"
+        },
+        "onPremisesImmutableId": {
+          "type": "string"
+        },
+        "onPremisesLastSyncDateTime": {
+          "type": "string"
+        },
+        "onPremisesSecurityIdentifier": {
+          "type": "string"
+        },
+        "onPremisesSamAccountName": {
+          "type": "string"
+        },
+        "onPremisesSyncEnabled": {
+          "type": "string"
+        },
+        "onPremisesUserPrincipalName": {
+          "type": "string"
+        },
+        "otherMails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "passwordPolicies": {
+          "type": "string"
+        },
+        "passwordProfile": {
+          "type": "string"
+        },
+        "officeLocation": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "proxyAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "refreshTokensValidFromDateTime": {
+          "type": "string"
+        },
+        "imAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isResourceAccount": {
+          "type": "string"
+        },
+        "showInAddressList": {
+          "type": "string"
+        },
+        "signInSessionsValidFromDateTime": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "streetAddress": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "usageLocation": {
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "assignedLicenses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignedLicense"
+          }
+        },
+        "assignedPlans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignedPlan"
+          }
+        },
+        "onPremisesProvisioningErrors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "onPremisesExtensionAttributes": {
+          "$ref": "#/definitions/OnPremisesExtensionAttributes"
+        },
+        "provisionedPlans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisionedPlan"
+          }
+        }
+      },
+      "required": [
+        "@odata.type",
+        "id",
+        "accountEnabled",
+        "businessPhones",
+        "createdDateTime",
+        "displayName",
+        "givenName",
+        "mail",
+        "mailNickname",
+        "otherMails",
+        "proxyAddresses",
+        "refreshTokensValidFromDateTime",
+        "imAddresses",
+        "signInSessionsValidFromDateTime",
+        "surname",
+        "usageLocation",
+        "userPrincipalName",
+        "userType",
+        "assignedLicenses",
+        "assignedPlans",
+        "onPremisesProvisioningErrors",
+        "onPremisesExtensionAttributes",
+        "provisionedPlans"
+      ]
+    },
+    "AssignedLicense": {
+      "title": "AssignedLicense",
+      "example": {
+        "disabledPlans": [],
+        "skuId": "189a915c-fe4f-4ffa-bde4-85b9628d07a0"
+      },
+      "type": "object",
+      "properties": {
+        "disabledPlans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skuId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "disabledPlans",
+        "skuId"
+      ]
+    },
+    "AssignedPlan": {
+      "title": "AssignedPlan",
+      "example": {
+        "assignedDateTime": "2019-03-19T20:50:35Z",
+        "capabilityStatus": "Enabled",
+        "service": "SharePoint",
+        "servicePlanId": "a361d6e2-509e-4e25-a8ad-950060064ef4"
+      },
+      "type": "object",
+      "properties": {
+        "assignedDateTime": {
+          "type": "string"
+        },
+        "capabilityStatus": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "servicePlanId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "assignedDateTime",
+        "capabilityStatus",
+        "service",
+        "servicePlanId"
+      ]
+    },
+    "OnPremisesExtensionAttributes": {
+      "title": "OnPremisesExtensionAttributes",
+      "example": {
+        "extensionAttribute1": null,
+        "extensionAttribute2": null,
+        "extensionAttribute3": null,
+        "extensionAttribute4": null,
+        "extensionAttribute5": null,
+        "extensionAttribute6": null,
+        "extensionAttribute7": null,
+        "extensionAttribute8": null,
+        "extensionAttribute9": null,
+        "extensionAttribute10": null,
+        "extensionAttribute11": null,
+        "extensionAttribute12": null,
+        "extensionAttribute13": null,
+        "extensionAttribute14": null,
+        "extensionAttribute15": null
+      },
+      "type": "object",
+      "properties": {
+        "extensionAttribute1": {
+          "type": "string"
+        },
+        "extensionAttribute2": {
+          "type": "string"
+        },
+        "extensionAttribute3": {
+          "type": "string"
+        },
+        "extensionAttribute4": {
+          "type": "string"
+        },
+        "extensionAttribute5": {
+          "type": "string"
+        },
+        "extensionAttribute6": {
+          "type": "string"
+        },
+        "extensionAttribute7": {
+          "type": "string"
+        },
+        "extensionAttribute8": {
+          "type": "string"
+        },
+        "extensionAttribute9": {
+          "type": "string"
+        },
+        "extensionAttribute10": {
+          "type": "string"
+        },
+        "extensionAttribute11": {
+          "type": "string"
+        },
+        "extensionAttribute12": {
+          "type": "string"
+        },
+        "extensionAttribute13": {
+          "type": "string"
+        },
+        "extensionAttribute14": {
+          "type": "string"
+        },
+        "extensionAttribute15": {
+          "type": "string"
+        }
+      }
+    },
+    "ProvisionedPlan": {
+      "title": "ProvisionedPlan",
+      "example": {
+        "capabilityStatus": "Enabled",
+        "provisioningStatus": "Success",
+        "service": "exchange"
+      },
+      "type": "object",
+      "properties": {
+        "capabilityStatus": {
+          "type": "string"
+        },
+        "provisioningStatus": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "capabilityStatus",
+        "provisioningStatus",
+        "service"
+      ]
+    },
+    "ListTabsforChannel": {
+      "title": "ListTabsforChannel",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels('19%3A5836677d74f84fc4bcdf9f07e0492658%40thread.skype')/tabs",
+        "value": [
+          {
+            "id": "8c09cfe7-80ee-4da5-b959-9c5ab6de290f",
+            "displayName": "Wiki",
+            "webUrl": "https://teams.microsoft.com/l/channel/19%3a5836677d74f84fc4bcdf9f07e0492658%40thread.skype/tab%3a%3a00f0de6b-f59e-4f7a-813f-3a911d3d7c9b?label=Wiki&groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+            "configuration": {
+              "entityId": null,
+              "contentUrl": null,
+              "removeUrl": null,
+              "websiteUrl": null,
+              "wikiTabId": 1,
+              "wikiDefaultTab": true,
+              "hasContent": false
+            }
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tab"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "value"
+      ]
+    },
+    "Tab": {
+      "title": "Tab",
+      "example": {
+        "id": "8c09cfe7-80ee-4da5-b959-9c5ab6de290f",
+        "displayName": "Wiki",
+        "webUrl": "https://teams.microsoft.com/l/channel/19%3a5836677d74f84fc4bcdf9f07e0492658%40thread.skype/tab%3a%3a00f0de6b-f59e-4f7a-813f-3a911d3d7c9b?label=Wiki&groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+        "configuration": {
+          "entityId": null,
+          "contentUrl": null,
+          "removeUrl": null,
+          "websiteUrl": null,
+          "wikiTabId": 1,
+          "wikiDefaultTab": true,
+          "hasContent": false
+        }
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/Configuration"
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "webUrl",
+        "configuration"
+      ]
+    },
+    "Configuration": {
+      "title": "Configuration",
+      "example": {
+        "entityId": null,
+        "contentUrl": null,
+        "removeUrl": null,
+        "websiteUrl": null
+      },
+      "type": "object",
+      "properties": {
+        "entityId": {
+          "type": "string"
+        },
+        "contentUrl": {
+          "type": "string"
+        },
+        "removeUrl": {
+          "type": "string"
+        },
+        "websiteUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "GetTabforChannel": {
+      "title": "GetTabforChannel",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels('19%3A5836677d74f84fc4bcdf9f07e0492658%40thread.skype')/tabs/$entity",
+        "id": "8c09cfe7-80ee-4da5-b959-9c5ab6de290f",
+        "displayName": "Wiki",
+        "webUrl": "https://teams.microsoft.com/l/channel/19%3a5836677d74f84fc4bcdf9f07e0492658%40thread.skype/tab%3a%3a00f0de6b-f59e-4f7a-813f-3a911d3d7c9b?label=Wiki&groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+        "configuration": {
+          "entityId": null,
+          "contentUrl": null,
+          "removeUrl": null,
+          "websiteUrl": null,
+          "wikiTabId": 1,
+          "wikiDefaultTab": true,
+          "hasContent": false
+        }
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/Configuration"
+        }
+      },
+      "required": [
+        "@odata.context",
+        "id",
+        "displayName",
+        "webUrl",
+        "configuration"
+      ]
+    },
+    "AddaChanneltoaTeamRequest": {
+      "title": "AddaChanneltoaTeamRequest",
+      "example": {
+        "displayName": "Innovation Discussion2",
+        "description": "This channel is where we debate all future innovation plans"
+      },
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "description"
+      ]
+    },
+    "AddaChanneltoaTeam": {
+      "title": "AddaChanneltoaTeam",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels/$entity",
+        "id": "19:29d5dfa34fe04cb291e35d8bcb6dc10c@thread.skype",
+        "displayName": "Innovation Discussion",
+        "description": "This channel is where we debate all future innovation plans",
+        "email": "",
+        "webUrl": "https://teams.microsoft.com/l/channel/19%3a29d5dfa34fe04cb291e35d8bcb6dc10c%40thread.skype/Innovation+Discussion?groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080"
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.context",
+        "id",
+        "displayName",
+        "description",
+        "email",
+        "webUrl"
+      ]
+    },
+    "ListChannelsforaTeam": {
+      "title": "ListChannelsforaTeam",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels",
+        "value": [
+          {
+            "id": "19:557cc6fd93134835a90dd88b099087cf@thread.skype",
+            "displayName": "General",
+            "description": "Development Research Team",
+            "email": "",
+            "webUrl": "https://teams.microsoft.com/l/channel/19%3a557cc6fd93134835a90dd88b099087cf%40thread.skype/General?groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Channel"
+          }
+        }
+      },
+      "required": [
+        "@odata.context",
+        "value"
+      ]
+    },
+    "Channel": {
+      "title": "Channel",
+      "example": {
+        "id": "19:557cc6fd93134835a90dd88b099087cf@thread.skype",
+        "displayName": "General",
+        "description": "Development Research Team",
+        "email": "",
+        "webUrl": "https://teams.microsoft.com/l/channel/19%3a557cc6fd93134835a90dd88b099087cf%40thread.skype/General?groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080"
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "description",
+        "email",
+        "webUrl"
+      ]
+    },
+    "UpdateChannelRequest": {
+      "title": "UpdateChannelRequest",
+      "example": {
+        "description": "An updated value",
+        "displayName": "Crazy ideas"
+      },
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "displayName"
+      ]
+    },
+    "CheckTeamArchiveStatus": {
+      "title": "CheckTeamArchiveStatus",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/operations/$entity",
+        "id": "e38411ee-270b-4106-8b4c-23271a9421d0",
+        "operationType": "archiveTeam",
+        "createdDateTime": "2019-05-21T16:09:33.6632793Z",
+        "status": "succeeded",
+        "lastActionDateTime": "2019-05-21T16:09:34.4913791Z",
+        "attemptsCount": 1,
+        "targetResourceId": "4ab574b6-bbc6-4a47-8059-40fa698deb08",
+        "targetResourceLocation": "/teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')",
+        "error": null,
+        "Value": "{\"Status\":1,\"PreArchivalMembersPermission\":0}"
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "operationType": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "lastActionDateTime": {
+          "type": "string"
+        },
+        "attemptsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "targetResourceId": {
+          "type": "string"
+        },
+        "targetResourceLocation": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.context",
+        "id",
+        "operationType",
+        "createdDateTime",
+        "status",
+        "lastActionDateTime",
+        "attemptsCount",
+        "targetResourceId",
+        "targetResourceLocation",
+        "Value"
+      ]
+    },
+    "GetUserbyPrincipalName": {
+      "title": "GetUserbyPrincipalName",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "businessPhones": [],
+        "displayName": "Jason Trent",
+        "givenName": "Jason",
+        "jobTitle": null,
+        "mail": "jason@k2rocks.com",
+        "mobilePhone": null,
+        "officeLocation": null,
+        "preferredLanguage": null,
+        "surname": "Trent",
+        "userPrincipalName": "jason@k2rocks.com",
+        "id": "625c3e99-c685-447d-8b92-51f5c73c3ad5"
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "businessPhones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "givenName": {
+          "type": "string"
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "mail": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        },
+        "officeLocation": {
+          "type": "string"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.context",
+        "businessPhones",
+        "displayName",
+        "givenName",
+        "mail",
+        "surname",
+        "userPrincipalName",
+        "id"
+      ]
+    },
+    "AddTeamRequest": {
+      "title": "AddTeamRequest",
+      "example": {
+        "memberSettings": {
+          "allowCreateUpdateChannels": true,
+          "allowDeleteChannels": true,
+          "allowAddRemoveApps": true,
+          "allowCreateUpdateRemoveTabs": true,
+          "allowCreateUpdateRemoveConnectors": true
+        },
+        "guestSettings": {
+          "allowCreateUpdateChannels": false,
+          "allowDeleteChannels": false
+        },
+        "messagingSettings": {
+          "allowUserEditMessages": true,
+          "allowUserDeleteMessages": true,
+          "allowOwnerDeleteMessages": true,
+          "allowTeamMentions": true,
+          "allowChannelMentions": true
+        },
+        "funSettings": {
+          "allowGiphy": true,
+          "giphyContentRating": "moderate",
+          "allowStickersAndMemes": true,
+          "allowCustomMemes": true
+        }
+      },
+      "type": "object",
+      "properties": {
+        "memberSettings": {
+          "$ref": "#/definitions/MemberSettings"
+        },
+        "guestSettings": {
+          "$ref": "#/definitions/GuestSettings"
+        },
+        "messagingSettings": {
+          "$ref": "#/definitions/MessagingSettings"
+        },
+        "funSettings": {
+          "$ref": "#/definitions/FunSettings"
+        }
+      }
+    },
+    "AddTabtoChannelRequest": {
+      "title": "AddTabtoChannelRequest",
+      "example": {
+        "displayName": "My Contoso Tab",
+        "teamsApp@odata.bind": "https://graph.microsoft.com/beta/appCatalogs/teamsApps/com.microsoft.teamspace.tab.wiki",
+        "configuration": {
+          "entityId": "2DCA2E6C7A10415CAF6B8AB6661B3154",
+          "contentUrl": "https://www.contoso.com/Orders/2DCA2E6C7A10415CAF6B8AB6661B3154/tabView",
+          "websiteUrl": "https://www.contoso.com/Orders/2DCA2E6C7A10415CAF6B8AB6661B3154",
+          "removeUrl": "https://www.contoso.com/Orders/2DCA2E6C7A10415CAF6B8AB6661B3154/uninstallTab"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "teamsApp@odata.bind": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/Configuration"
+        }
+      },
+      "required": [
+        "displayName",
+        "teamsApp@odata.bind"
+      ]
+    },
+    "AddTabtoChannel": {
+      "title": "AddTabtoChannel",
+      "example": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4ab574b6-bbc6-4a47-8059-40fa698deb08')/channels('19%3A5836677d74f84fc4bcdf9f07e0492658%40thread.skype')/tabs/$entity",
+        "id": "46aed70d-cb1d-4ce2-8e2f-c23c889d687b",
+        "displayName": "My Contoso Tab",
+        "webUrl": "https://teams.microsoft.com/l/channel/19%3a5836677d74f84fc4bcdf9f07e0492658%40thread.skype/tab%3a%3a9d49387b-3ebe-46d9-b92f-88b6e4148ddd?label=My+Contoso+Tab&groupId=4ab574b6-bbc6-4a47-8059-40fa698deb08&tenantId=7233b38c-175e-44dd-835d-ae3a87121080",
+        "configuration": {
+          "entityId": null,
+          "contentUrl": null,
+          "removeUrl": null,
+          "websiteUrl": null
+        }
+      },
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/Configuration"
+        }
+      },
+      "required": [
+        "@odata.context",
+        "id",
+        "displayName",
+        "webUrl",
+        "configuration"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Teams",
+      "description": "Microsoft Teams is the ultimate hub for teamwork and intelligent communications. Built on the strength and scale of Office 365 with over 120 million users, Microsoft Teams delivers chat-based collaboration, meetings, calling, and enterprise voice features."
+    },
+    {
+      "name": "Tabs",
+      "description": "A teamsTab is a tab that's pinned (attached) to a channel within a team."
+    },
+    {
+      "name": "Channels",
+      "description": "Teams are made up of channels, which are the conversations you have with your teammates. Each channel is dedicated to a specific topic, department, or project. Channels are where the work actually gets done - where text, audio, and video conversations open to the whole team happen, where files are shared, and where tabs are added."
+    },
+    {
+      "name": "Management",
+      "description": "Operations that are helpful for managing a team."
+    }
+  ]
+}
