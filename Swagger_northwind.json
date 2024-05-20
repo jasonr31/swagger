@@ -1,1 +1,56 @@
-{"swagger":"2.0","info":{"contact":{},"description":"API for northwind.now.sh","title":"Northwind Db","version":"1.0.0"},"host":"northwind.now.sh","basePath":"/","schemes":["https"],"paths":{"/api/products":{"get":{"parameters":[],"responses":{"200":{"description":""}},"tags":["Products"],"description":"Products","operationId":"getproducts","summary":"getProducts"}},"/api/suppliers":{"get":{"parameters":[],"responses":{"200":{"description":""}},"tags":["Suppliers"],"description":"Get suppliers","operationId":"getsuppliers","summary":"getSuppliers"}}},"tags":[{"name":"Products"},{"name":"Suppliers"}]}
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {},
+        "description": "API for northwind.now.sh",
+        "title": "Northwind Db",
+        "version": "1.0.0"
+    },
+    "host": "northwind.now.sh",
+    "basePath": "api/",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/api/products": {
+            "get": {
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Products"
+                ],
+                "description": "Products",
+                "operationId": "getproducts",
+                "summary": "getProducts"
+            }
+        },
+        "/api/suppliers": {
+            "get": {
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Suppliers"
+                ],
+                "description": "Get suppliers",
+                "operationId": "getsuppliers",
+                "summary": "getSuppliers"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Products"
+        },
+        {
+            "name": "Suppliers"
+        }
+    ]
+}
