@@ -25,10 +25,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Product"
-                            }
+                            "$ref": "#/definitions/Product"
                         },
                         "examples": {
                             "application/json": {
