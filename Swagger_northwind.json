@@ -2,10 +2,10 @@
     "swagger": "2.0",
     "info": {
         "title": "Northwind",
-        "description": "API for northwind.now.sh",
+        "description": "API for northwind.vercel.app",
         "version": "0.0.0"
     },
-    "host": "northwind.now.sh",
+    "host": "northwind.vercel.app",
     "basePath": "/api",
     "schemes": [
         "https"
