@@ -68,6 +68,41 @@
                 "security": []
             }
         },
+        "/suppliers/{id}/products": {
+            "get": {
+                "tags": [
+                    "Suppliers"
+                ],
+                "description": "Get productsby supplier",
+                "operationId": "getProductsbySupplier",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32",
+                        "x-example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Supplier"
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
         "/suppliers": {
             "get": {
                 "tags": [
