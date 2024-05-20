@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Northwind",
-        "description": "API for northwind.vercel.app",
+        "description": "API for northwind.now.sh",
         "version": "0.0.0"
     },
     "host": "northwind.vercel.app",
@@ -25,7 +25,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Product"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
                         },
                         "examples": {
                             "application/json": {
