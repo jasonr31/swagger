@@ -1,56 +1,272 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {},
+        "title": "Northwind",
         "description": "API for northwind.now.sh",
-        "title": "Northwind Db",
-        "version": "1.0.0"
+        "version": "0.0.0"
     },
-    "host": "northwind.now.sh",
-    "basePath": "/",
+    "host": "northwind.vercel.app",
+    "basePath": "/api",
     "schemes": [
         "https"
     ],
     "paths": {
-        "/api/products": {
+        "/products": {
             "get": {
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
                 "tags": [
                     "Products"
                 ],
-                "description": "Products",
-                "operationId": "getproducts",
-                "summary": "getProducts"
-            }
-        },
-        "/api/suppliers": {
-            "get": {
-                "parameters": [],
+                "description": "Get products",
+                "operationId": "getProducts",
+                "produces": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Category"
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "id": 4,
+                                "supplierId": 2,
+                                "categoryId": 3,
+                                "quantityPerUnit": "48 - 6 oz jars",
+                                "unitPrice": 22,
+                                "unitsInStock": 53,
+                                "unitsOnOrder": 0,
+                                "reorderLevel": 0,
+                                "discontinued": true,
+                                "name": "Chef Anton's Cajun Seasoning",
+                                "supplier": {
+                                    "id": 2,
+                                    "companyName": "New Orleans Cajun Delights",
+                                    "contactName": "Shelley Burke",
+                                    "contactTitle": "Order Administrator",
+                                    "address": {
+                                        "street": "P.O. Box 78934",
+                                        "city": "New Orleans",
+                                        "region": "LA",
+                                        "postalCode": 70117,
+                                        "country": "USA",
+                                        "phone": "(100) 555-4822"
+                                    }
+                                },
+                                "category": {
+                                    "id": 3,
+                                    "description": "Desserts candies and sweet breads",
+                                    "name": "Confections"
+                                }
+                            }
+                        }
                     }
                 },
+                "security": []
+            }
+        },
+        "/suppliers": {
+            "get": {
                 "tags": [
                     "Suppliers"
                 ],
                 "description": "Get suppliers",
-                "operationId": "getsuppliers",
-                "summary": "getSuppliers"
+                "operationId": "getSuppliers",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Supplier"
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "id": 4,
+                                "companyName": "Tokyo Traders",
+                                "contactName": "Yoshi Nagase",
+                                "contactTitle": "Marketing Manager",
+                                "address": {
+                                    "street": "9-8 Sekimai Musashino-shi",
+                                    "city": "Tokyo",
+                                    "region": "NULL",
+                                    "postalCode": 100,
+                                    "country": "Japan",
+                                    "phone": "(03) 3555-5011"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
             }
         }
     },
+    "definitions": {
+        "Category": {
+            "description": "Model for Category",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "x-example": "Desserts candies and sweet breads"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "3"
+                },
+                "name": {
+                    "type": "string",
+                    "x-example": "Confections"
+                }
+            }
+        },
+        "Product": {
+            "description": "Model for Product",
+            "required": [
+                "category"
+            ],
+            "properties": {
+                "category": {
+                    "$ref": "#/definitions/Category",
+                    "x-example": "{\n  \"id\": 3,\n  \"description\": \"Desserts candies and sweet breads\",\n  \"name\": \"Confections\"\n}"
+                },
+                "categoryId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "3"
+                },
+                "discontinued": {
+                    "type": "boolean",
+                    "x-example": "true"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "4"
+                },
+                "name": {
+                    "type": "string",
+                    "x-example": "Chef Anton's Cajun Seasoning"
+                },
+                "quantityPerUnit": {
+                    "type": "string",
+                    "x-example": "48 - 6 oz jars"
+                },
+                "reorderLevel": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "0"
+                },
+                "supplier": {
+                    "$ref": "#/definitions/Supplier",
+                    "x-example": "{\n  \"id\": 2,\n  \"companyName\": \"New Orleans Cajun Delights\",\n  \"contactName\": \"Shelley Burke\",\n  \"contactTitle\": \"Order Administrator\",\n  \"address\": {\n    \"street\": \"P.O. Box 78934\",\n    \"city\": \"New Orleans\",\n    \"region\": \"LA\",\n    \"postalCode\": 70117,\n    \"country\": \"USA\",\n    \"phone\": \"(100) 555-4822\"\n  }\n}"
+                },
+                "supplierId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "2"
+                },
+                "unitPrice": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "22"
+                },
+                "unitsInStock": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "53"
+                },
+                "unitsOnOrder": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "0"
+                }
+            }
+        },
+        "Address": {
+            "description": "Model for Address",
+            "required": [
+                "city"
+            ],
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "x-example": "New Orleans"
+                },
+                "country": {
+                    "type": "string",
+                    "x-example": "USA"
+                },
+                "phone": {
+                    "type": "string",
+                    "x-example": "(100) 555-4822"
+                },
+                "postalCode": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "70117"
+                },
+                "region": {
+                    "type": "string",
+                    "x-example": "LA"
+                },
+                "street": {
+                    "type": "string",
+                    "x-example": "P.O. Box 78934"
+                }
+            }
+        },
+        "Supplier": {
+            "description": "Model for Supplier",
+            "required": [
+                "address"
+            ],
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/Address",
+                    "x-example": "{\n  \"street\": \"P.O. Box 78934\",\n  \"city\": \"New Orleans\",\n  \"region\": \"LA\",\n  \"postalCode\": 70117,\n  \"country\": \"USA\",\n  \"phone\": \"(100) 555-4822\"\n}"
+                },
+                "companyName": {
+                    "type": "string",
+                    "x-example": "New Orleans Cajun Delights"
+                },
+                "contactName": {
+                    "type": "string",
+                    "x-example": "Shelley Burke"
+                },
+                "contactTitle": {
+                    "type": "string",
+                    "x-example": "Order Administrator"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "2"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {},
+    "security": [],
     "tags": [
         {
-            "name": "Products"
+            "name": "Products",
+            "description": "Operations about Products"
         },
         {
-            "name": "Suppliers"
+            "name": "Suppliers",
+            "description": "Operations about Suppliers"
         }
     ]
 }
