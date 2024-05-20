@@ -213,8 +213,7 @@
                     "x-example": "(100) 555-4822"
                 },
                 "postalCode": {
-                    "type": "integer",
-                    "format": "int32",
+                    "type": "string",
                     "x-example": "70117"
                 },
                 "region": {
