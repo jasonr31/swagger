@@ -1,0 +1,317 @@
+{
+  "swagger": "2.0",
+  "x-ntx-render-version": 2,
+  "info": {
+    "description": "Nintex Gateway - Custom Connector - SharePoint on premises",
+    "version": "0.1",
+    "title": "Nintex Gateway - Custom Connector"
+  },
+  "host": "localhost",
+  "x-ntx-host": "{{x-ntx-gateway-uri}}",
+  "basePath": "/xtension/",
+  "schemes": ["https"],
+  "security": [
+    {
+      "username-basic": []
+    }
+  ],
+  "paths": {
+    "/x-ntx-validate": {
+      "get": {
+        "operationId": "validateConnection",
+        "x-ntx-visibility": "internal",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/_api/contextinfo": {
+      "post": {
+        "summary": "Get Context Info",
+        "operationId": "GetContextInfo1",
+        "parameters": [
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json;odata=verbose",
+            "x-ntx-initial": "application/json;odata=verbose"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetContextInfo1Response"
+            }
+          }
+        }
+      }
+    },
+    "/{siteUrl}/_api/web/GetFolderByServerRelativeUrl('/{doclibfolder}/')/files/add(overwrite=true, url='{filename}')": {
+      "post": {
+        "summary": "Post a file",
+        "operationId": "PostAFile1",
+        "consumes": ["application/octet-stream"],
+        "parameters": [
+          {
+            "x-ntx-summary": "File",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json;odata=verbose",
+            "x-ntx-initial": "application/json;odata=verbose"
+          },
+          {
+            "x-ntx-summary": "Form Digest Token",
+            "name": "X-RequestDigest",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The Form Digest"
+          },
+          {
+            "name": "doclibfolder",
+            "x-ntx-sublabel": "Format is sites/sitename/subsite/library/folder",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "required": true,
+            "x-ntx-sublabel": "Format is sites/sitename/subsite",
+            "description": "test",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostAFile1Response"
+            }
+          }
+        }
+      }
+    },
+    "/{siteUrl}/_api/web/GetFileByServerRelativeUrl('{docRelativeUrl}')/$value": {
+      "get": {
+        "summary": "Get a file",
+        "operationId": "GetaFile1",
+        "produces": ["application/octet-stream"],
+        "parameters": [
+          {
+            "name": "docRelativeUrl",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "required": true,
+            "x-ntx-sublabel": "Format is sites/sitename/subsite",
+            "description": "test",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    }
+  },
+  "/{siteUrl}/_api/web/GetFolderByServerRelativeUrl('/{docRelativeUrl}')/CheckOut()": {
+    "post": {
+      "summary": "Check out a file",
+      "operationId": "CheckoutAFile1",
+      "consumes": ["application/octet-stream"],
+      "parameters": [        
+        {
+          "name": "accept",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "default": "application/json;odata=verbose",
+          "x-ntx-initial": "application/json;odata=verbose"
+        },
+        {
+          "x-ntx-summary": "Form Digest Token",
+          "name": "X-RequestDigest",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "description": "The Form Digest"
+        },
+        {
+          "name": "docRelativeUrl",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "siteUrl",
+          "in": "path",
+          "required": true,
+          "x-ntx-sublabel": "Format is sites/sitename/subsite",
+          "description": "test",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/PostAFile1Response"
+          }
+        }
+      }
+    }
+  },
+  "/{siteUrl}/_api/web/GetFolderByServerRelativeUrl('/{docRelativeUrl}')/CheckIn(comment='{comment}',checkintype=0)": {
+    "post": {
+      "summary": "Check in a file",
+      "operationId": "CheckinAFile1",
+      "consumes": ["application/octet-stream"],
+      "parameters": [        
+        {
+          "name": "accept",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "default": "application/json;odata=verbose",
+          "x-ntx-initial": "application/json;odata=verbose"
+        },
+        {
+          "x-ntx-summary": "Form Digest Token",
+          "name": "X-RequestDigest",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "description": "The Form Digest"
+        },
+        {
+          "name": "comment",
+          "x-ntx-sublabel": "Add comment for check in.",
+          "in": "path",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "docRelativeUrl",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "siteUrl",
+          "in": "path",
+          "required": true,
+          "x-ntx-sublabel": "Format is sites/sitename/subsite",
+          "description": "test",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/PostAFile1Response"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PostAFile1Response": {},
+    "GetContextInfo1Response": {
+      "type": "object",
+      "properties": {
+        "d": {
+          "type": "object",
+          "properties": {
+            "GetContextWebInformation": {
+              "type": "object",
+              "properties": {
+                "FormDigestTimeoutSeconds": { "type": "number" },
+                "FormDigestValue": { "type": "string" },
+                "LibraryVersion": { "type": "string" },
+                "SiteFullUrl": { "type": "string" },
+                "SupportedSchemaVersions": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                },
+                "WebFullUrl": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apikey-basic-integrated": {
+      "type": "basic",
+      "description": "api key for NG, basic for LOB",
+      "x-ntx-connection-validation": {
+        "operationId": "validateConnection"
+      },
+      "x-ntx-connection-properties": {
+        "type": "object",
+        "required": ["x-ntx-gateway-id"],
+        "properties": {
+          "x-ntx-gateway-xtension-integrated-authentication": {
+            "type": "string",
+            "description": "Line of business integrated authentication",
+            "title": "Use integrated authentication",
+            "default": "Yes",
+            "enum": ["Yes", "No"]
+          },
+          "x-ntx-gateway-apikey": {
+            "type": "string",
+            "Title": "Gateway API key"
+          },
+          "x-ntx-gateway-xtension-baseurl": {
+            "type": "string",
+            "title": "The base URL of the web service"
+          },
+          "x-ntx-gateway-id": {
+            "type": "string",
+            "title": "Nintex Gateway"
+          }
+        }
+      }
+    }
+  }
+}
