@@ -109,6 +109,9 @@
                 "clouds": {
                     "$ref": "#/definitions/Clouds"
                 },
+                "rain": {
+                    "$ref": "#/components/schemas/Rain"
+                },
                 "dt": {
                     "type": "string",
                     "description": "Time of data calculation, unic, UTC"
@@ -231,6 +234,18 @@
                     "type": "integer",
                     "format": "int32"
                 }
+            }
+        },
+        "Rain": {
+            "title": "Rain",
+            "type": "object",
+            "properties": {
+              "3h": {
+                "type": "integer",
+                "description": "Rain volume for the last 3 hours",
+                "format": "int32",
+                "example": 3
+              }
             }
         },
         "Sys": {
