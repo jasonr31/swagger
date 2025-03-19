@@ -1,0 +1,245 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.2.0",
+    "title": "Instances API",
+    "description": "## Authentication\nAll requests to Nintex Workflow APIs require a **bearer** token to be included in the Authorization header.\n\n```bash\ncurl  -X GET \"https://us.nintex.io/workflows/v1/designs\" -H \"Authorization: Bearer YOUR_TOKEN_HERE\" -H \"Accept: application/json\"\n```\nPlease see [Authentication](../docs/authentication.md) on generating authentication tokens.\n\n* A **[workflow](../docs/workflows.md)** is the design for an automated process, such as a document review and approval.\n* An **[instance](../docs/instances.md)** is the execution of a workflow; a specific occurrence of the workflow being run.\n* A **[task](../docs/tasks.md)** is a job assigned to one or more people by a workflow instance, such as an approval.",
+    "license": {
+      "name": "Apache",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "us.nintex.io",
+  "basePath": "/workflows/v1",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "Instances",
+      "description": "Instances API V1"
+    }
+  ],
+  "paths": {
+    "/instances/{instance_id}/terminate": {
+      "post": {
+        "description": "Stop a currently-running instance of a workflow. You cannot restart instances once they are stopped.\n\n**Scopes:** `nc:instance:manage`",
+        "summary": "Stop an instance",
+        "operationId": "Terminate an instance",
+        "parameters": [
+          {
+            "name": "instance_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier of the instance to terminate",
+            "type": "string",
+            "default": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "status": "OK"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "instance_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier of the instance to terminate",
+            "type": "string",
+            "default": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"
+          }
+        ],
+        "requestBody": {
+          "description": "The reason for terminating the workflow instance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Terminate a workflow",
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "description": "Reason the workflow instance was terminated",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "reason"
+                ]
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "reason": "Terminated by user"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instances/{instance_id}/resolve": {
+      "post": {
+        "description": "Resolve an instance that is paused due to an error in one of the actions. You can retry the failed action, or fail the workflow instance.\n\n**Scopes:** `nc:instance:execute`",
+        "summary": "Resolve a paused instance",
+        "parameters": [
+          {
+            "name": "instance_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier of the workflow instance to resolve",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "../models/ResolveOutput.v1.yaml"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "../models/Error.v2.yaml"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "../models/Error.v2.yaml"
+            }
+          },
+          "503": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "../models/Error.v2.yaml"
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../models/ResolveWorkflowInput.v1.yaml"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/designs/{workflow_id}/instances": {
+      "post": {
+        "description": "Create and start a workflow instance to run a workflow. See the documentation for more information on starting a workflow instance.\n\n**Scopes:** `nc:instance:execute`",
+        "summary": "Create a workflow instance",
+        "operationId": "Start a workflow",
+        "parameters": [
+          {
+            "name": "workflow_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier of the workflow you want to create an instance of.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Unique identifier for the workflow instance you created.",
+            "schema": {
+              "title": "Start a workflow response",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "Unique identifier of the created workflow instance",
+                  "type": "string"
+                }
+              },
+              "examples": {
+                "application/json": {
+                  "id": "af0f4e00-3974-4fde-bfb9-a03220e62a3d_0_1"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          },
+          {
+            "urlToken": []
+          }
+        ],
+        "requestBody": {
+          "description": "The start data the workflow requires",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Start workflow request",
+                "type": "object",
+                "properties": {
+                  "startData": {
+                    "type": "object",
+                    "format": "json",
+                    "description": "The start data the workflow requires, as a comma-separated key-value list enveloped by a top level `startData` object.\n Example:\n ```\n{ \n \t \"se_name\": \"John Wick\",\n \t \"se_age\": \"30\" \n} \n ```"
+                  }
+                },
+                "example": {
+                  "startData": {
+                    "se_name": "John Wick",
+                    "se_email": "john.wick@acme.com"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "urlToken": {
+      "type": "apiKey",
+      "name": "token",
+      "in": "query"
+    }
+  }
+}
