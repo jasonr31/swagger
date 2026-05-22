@@ -14,16 +14,17 @@
   "securityDefinitions": {
     "azureAD": {
       "type": "oauth2",
-      "flow": "application",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
       "scopes": {
-        "https://graph.microsoft.com/.default": "Access Microsoft Graph with app permissions"
+        "https://graph.microsoft.com/TeamsApp.ReadWrite.All": "Read and write Teams apps"
       }
     }
   },
   "security": [
     {
-      "azureAD": ["https://graph.microsoft.com/.default"]
+      "azureAD": ["https://graph.microsoft.com/TeamsApp.ReadWrite.All"]
     }
   ],
   "paths": {
@@ -209,7 +210,7 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/GetTeamsforUser" }
+            "schema": { "$ref": "#/definitions/TeamSummaryList" }
           }
         }
       }
@@ -231,7 +232,7 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/GetTeamOwners" }
+            "schema": { "$ref": "#/definitions/TeamMemberList" }
           }
         }
       }
@@ -349,15 +350,13 @@
             "name": "teamID",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "The GUID of the Team"
+            "type": "string"
           },
           {
             "name": "channelID",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "The ID of the channel"
+            "type": "string"
           },
           {
             "name": "Body",
@@ -370,9 +369,7 @@
           "201": {
             "description": "Message sent",
             "schema": { "$ref": "#/definitions/ChatMessageResponse" }
-          },
-          "401": { "description": "Unauthorized" },
-          "403": { "description": "Forbidden" }
+          }
         }
       }
     },
@@ -431,7 +428,7 @@
         "responses": {
           "201": {
             "description": "Tab added",
-            "schema": { "$ref": "#/definitions/AddTabtoChannel" }
+            "schema": { "$ref": "#/definitions/Tab" }
           }
         }
       }
@@ -450,7 +447,7 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/GetTabforChannel" }
+            "schema": { "$ref": "#/definitions/Tab" }
           }
         }
       },
@@ -529,7 +526,7 @@
     },
     "/teams/{teamID}/operations/{operationID}": {
       "get": {
-        "description": "Get the status of a team archive/unarchive operation.",
+        "description": "Get the status of a team archive or unarchive operation.",
         "summary": "Check Team Archive Status",
         "tags": ["Management"],
         "operationId": "CheckTeamArchiveStatus",
@@ -540,7 +537,7 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/CheckTeamArchiveStatus" }
+            "schema": { "$ref": "#/definitions/TeamOperation" }
           }
         }
       }
@@ -569,7 +566,10 @@
           { "name": "groupID", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": { "description": "Success" }
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/CreateGroup" }
+          }
         }
       }
     },
@@ -583,7 +583,10 @@
           { "name": "groupID", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": { "description": "Success" }
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/CreateGroup" }
+          }
         }
       }
     },
@@ -599,7 +602,7 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/GetUserbyPrincipalName" }
+            "schema": { "$ref": "#/definitions/TeamMember" }
           }
         }
       }
@@ -617,15 +620,8 @@
       "type": "object",
       "required": ["contentType", "content"],
       "properties": {
-        "contentType": {
-          "type": "string",
-          "enum": ["text", "html"],
-          "example": "html"
-        },
-        "content": {
-          "type": "string",
-          "example": "<p>Hello Team!</p>"
-        }
+        "contentType": { "type": "string" },
+        "content": { "type": "string" }
       }
     },
     "ChatMessageResponse": {
@@ -633,7 +629,7 @@
       "properties": {
         "id": { "type": "string" },
         "messageType": { "type": "string" },
-        "createdDateTime": { "type": "string", "format": "date-time" },
+        "createdDateTime": { "type": "string" },
         "body": { "$ref": "#/definitions/ItemBody" }
       }
     },
@@ -641,11 +637,7 @@
       "type": "object",
       "required": ["odataid"],
       "properties": {
-        "odataid": {
-          "type": "string",
-          "description": "The @odata.id URL for the user, e.g. https://graph.microsoft.com/v1.0/users/{id}",
-          "example": "https://graph.microsoft.com/v1.0/users/625c3e99-c685-447d-8b92-51f5c73c3ad5"
-        }
+        "odataid": { "type": "string" }
       }
     },
     "CreateGroupRequest": {
@@ -671,8 +663,7 @@
         "mailNickname": { "type": "string" },
         "securityEnabled": { "type": "boolean" },
         "visibility": { "type": "string" },
-        "createdDateTime": { "type": "string" },
-        "groupTypes": { "type": "array", "items": { "type": "string" } }
+        "createdDateTime": { "type": "string" }
       }
     },
     "AddTeamRequest": {
@@ -764,25 +755,27 @@
         "value": { "type": "array", "items": { "$ref": "#/definitions/TeamMember" } }
       }
     },
+    "TeamMemberList": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "array", "items": { "$ref": "#/definitions/TeamMember" } }
+      }
+    },
     "TeamMember": {
       "type": "object",
       "properties": {
         "id": { "type": "string" },
         "displayName": { "type": "string" },
         "mail": { "type": "string" },
-        "userPrincipalName": { "type": "string" }
+        "userPrincipalName": { "type": "string" },
+        "givenName": { "type": "string" },
+        "surname": { "type": "string" }
       }
     },
-    "GetTeamsforUser": {
+    "TeamSummaryList": {
       "type": "object",
       "properties": {
         "value": { "type": "array", "items": { "$ref": "#/definitions/TeamSummary" } }
-      }
-    },
-    "GetTeamOwners": {
-      "type": "object",
-      "properties": {
-        "value": { "type": "array", "items": { "$ref": "#/definitions/TeamMember" } }
       }
     },
     "TeamSummary": {
@@ -839,14 +832,6 @@
         "webUrl": { "type": "string" }
       }
     },
-    "GetTabforChannel": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "displayName": { "type": "string" },
-        "webUrl": { "type": "string" }
-      }
-    },
     "AddTabtoChannelRequest": {
       "type": "object",
       "required": ["displayName", "teamsAppId"],
@@ -855,33 +840,14 @@
         "teamsAppId": { "type": "string" }
       }
     },
-    "AddTabtoChannel": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "displayName": { "type": "string" },
-        "webUrl": { "type": "string" }
-      }
-    },
-    "CheckTeamArchiveStatus": {
+    "TeamOperation": {
       "type": "object",
       "properties": {
         "id": { "type": "string" },
         "operationType": { "type": "string" },
         "status": { "type": "string" },
-        "createdDateTime": { "type": "string", "format": "date-time" },
-        "lastActionDateTime": { "type": "string", "format": "date-time" }
-      }
-    },
-    "GetUserbyPrincipalName": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "displayName": { "type": "string" },
-        "mail": { "type": "string" },
-        "userPrincipalName": { "type": "string" },
-        "givenName": { "type": "string" },
-        "surname": { "type": "string" }
+        "createdDateTime": { "type": "string" },
+        "lastActionDateTime": { "type": "string" }
       }
     }
   }
