@@ -6,7 +6,7 @@
     "description": "Manage Microsoft Teams and Channels via Microsoft Graph API. OAuth handled by K2.",
     "contact": {}
   },
-  "host": "graph.microsoft.com",
+  "host": "httpbin.org",
   "basePath": "/v1.0",
   "schemes": ["https"],
   "consumes": ["application/json"],
