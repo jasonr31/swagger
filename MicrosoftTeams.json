@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "K2 for Microsoft Teams",
-    "description": "Microsoft Teams via Microsoft Graph API",
+    "description": "Manage Microsoft Teams and Channels via Microsoft Graph API. OAuth handled by K2.",
     "contact": {}
   },
   "host": "graph.microsoft.com",
@@ -11,32 +11,17 @@
   "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "securityDefinitions": {
-    "azureAD": {
-      "type": "oauth2",
-      "flow": "accessCode",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-      "scopes": {
-        "https://graph.microsoft.com/TeamsApp.ReadWrite.All": "Read and write Teams apps"
-      }
-    }
-  },
-  "security": [
-    {
-      "azureAD": ["https://graph.microsoft.com/TeamsApp.ReadWrite.All"]
-    }
-  ],
   "paths": {
+
     "/groups": {
       "post": {
-        "description": "Creates an Office 365 Group without any members.",
-        "summary": "Create Group",
-        "tags": ["Teams"],
+        "summary": "Create Team",
+        "description": "Creates an Office 365 Group which is the first step in creating a Team.",
         "operationId": "CreateGroup",
+        "tags": ["Teams"],
         "parameters": [
           {
-            "name": "Body",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": { "$ref": "#/definitions/CreateGroupRequest" }
@@ -44,629 +29,509 @@
         ],
         "responses": {
           "201": {
-            "description": "Group created",
-            "schema": { "$ref": "#/definitions/CreateGroup" }
+            "description": "Group created successfully",
+            "schema": { "$ref": "#/definitions/Group" }
+          }
+        }
+      }
+    },
+
+    "/groups/{groupId}/team": {
+      "put": {
+        "summary": "Provision Team from Group",
+        "description": "Creates a Team under an existing Office 365 Group.",
+        "operationId": "ProvisionTeam",
+        "tags": ["Teams"],
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Office 365 Group to convert to a Team"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ProvisionTeamRequest" }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Team provisioned successfully",
+            "schema": { "$ref": "#/definitions/Team" }
+          }
+        }
+      }
+    },
+
+    "/teams/{teamId}": {
+      "get": {
+        "summary": "Get Team",
+        "description": "Get the properties of a Team by its ID.",
+        "operationId": "GetTeam",
+        "tags": ["Teams"],
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Team"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Team" }
           }
         }
       },
-      "get": {
-        "description": "Lists the groups in an organization.",
-        "summary": "List Groups",
+      "delete": {
+        "summary": "Delete Team",
+        "description": "Deletes a Team and its associated Office 365 Group.",
+        "operationId": "DeleteTeam",
         "tags": ["Teams"],
-        "operationId": "ListGroups",
         "parameters": [
           {
-            "name": "$select",
-            "in": "query",
-            "required": false,
+            "name": "teamId",
+            "in": "path",
+            "required": true,
             "type": "string",
-            "description": "Fields to return e.g. id,resourceProvisioningOptions"
+            "description": "The ID of the Team to delete"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/ListofGroups" }
+          "204": {
+            "description": "Team deleted successfully"
           }
         }
       }
     },
-    "/groups/{groupID}/team": {
-      "put": {
-        "description": "Create a new team under a group.",
-        "summary": "Add Team to Group",
+
+    "/groups/{teamId}/members/$ref": {
+      "post": {
+        "summary": "Add Team Member",
+        "description": "Add a user as a member of a Team.",
+        "operationId": "AddTeamMember",
         "tags": ["Teams"],
-        "operationId": "AddTeamToGroup",
         "parameters": [
           {
-            "name": "groupID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "Body",
+            "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AddTeamRequest" }
+            "schema": { "$ref": "#/definitions/DirectoryObjectRef" }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Team added",
-            "schema": { "$ref": "#/definitions/AddTeamtoGroup" }
+          "204": {
+            "description": "Member added successfully"
           }
         }
       }
     },
-    "/groups/{teamID}/owners/$ref": {
-      "post": {
-        "description": "Add a user as an owner of a team.",
-        "summary": "Add Owner To Team",
+
+    "/groups/{teamId}/members/{memberId}/$ref": {
+      "delete": {
+        "summary": "Remove Team Member",
+        "description": "Remove a user from a Team.",
+        "operationId": "RemoveTeamMember",
         "tags": ["Teams"],
-        "operationId": "AddOwnerToTeam",
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "Body",
-            "in": "body",
+            "name": "memberId",
+            "in": "path",
             "required": true,
-            "schema": { "$ref": "#/definitions/OdataIdRequest" }
+            "type": "string",
+            "description": "The ID of the member to remove"
           }
         ],
         "responses": {
-          "204": { "description": "Owner added" }
+          "204": {
+            "description": "Member removed successfully"
+          }
         }
       }
     },
-    "/groups/{teamID}/members/$ref": {
+
+    "/groups/{teamId}/owners/$ref": {
       "post": {
-        "description": "Add a user as a member of a team.",
-        "summary": "Add Member to Team",
+        "summary": "Add Team Owner",
+        "description": "Add a user as an owner of a Team.",
+        "operationId": "AddTeamOwner",
         "tags": ["Teams"],
-        "operationId": "AddMemberToTeam",
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "Body",
+            "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/OdataIdRequest" }
+            "schema": { "$ref": "#/definitions/DirectoryObjectRef" }
           }
         ],
         "responses": {
-          "204": { "description": "Member added" }
+          "204": {
+            "description": "Owner added successfully"
+          }
         }
       }
     },
-    "/teams/{teamID}": {
-      "get": {
-        "description": "Get the properties of a Team by ID.",
-        "summary": "Get Team",
+
+    "/groups/{teamId}/owners/{ownerId}/$ref": {
+      "delete": {
+        "summary": "Remove Team Owner",
+        "description": "Remove a user as an owner of a Team.",
+        "operationId": "RemoveTeamOwner",
         "tags": ["Teams"],
-        "operationId": "GetTeam",
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/TeamFullDetail" }
-          }
-        }
-      }
-    },
-    "/groups/{teamID}/members": {
-      "get": {
-        "description": "List the members of a Group/Team.",
-        "summary": "List Team Members",
-        "tags": ["Teams"],
-        "operationId": "ListTeamMembers",
-        "parameters": [
+            "type": "string",
+            "description": "The ID of the Team"
+          },
           {
-            "name": "teamID",
+            "name": "ownerId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the owner to remove"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/ListTeamMembers" }
+          "204": {
+            "description": "Owner removed successfully"
           }
         }
       }
     },
-    "/users/{userID}/joinedTeams": {
-      "get": {
-        "description": "Show a list of all teams that a user is currently a member of.",
-        "summary": "List Teams for User",
-        "tags": ["Teams"],
-        "operationId": "ListTeamsForUser",
-        "parameters": [
-          {
-            "name": "userID",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/TeamSummaryList" }
-          }
-        }
-      }
-    },
-    "/groups/{teamID}/owners": {
-      "get": {
-        "description": "List all the owners of a team.",
-        "summary": "List Team Owners",
-        "tags": ["Teams"],
-        "operationId": "ListTeamOwners",
-        "parameters": [
-          {
-            "name": "teamID",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/TeamMemberList" }
-          }
-        }
-      }
-    },
-    "/teams/{teamID}/channels": {
+
+    "/teams/{teamId}/channels": {
       "post": {
-        "description": "Add a channel to a team.",
-        "summary": "Add Channel to Team",
+        "summary": "Create Channel",
+        "description": "Create a new channel in a Team.",
+        "operationId": "CreateChannel",
         "tags": ["Channels"],
-        "operationId": "AddTeamChannel",
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "Body",
+            "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AddChannelRequest" }
+            "schema": { "$ref": "#/definitions/CreateChannelRequest" }
           }
         ],
         "responses": {
           "201": {
-            "description": "Channel created",
+            "description": "Channel created successfully",
             "schema": { "$ref": "#/definitions/Channel" }
           }
         }
       },
       "get": {
-        "description": "List all the channels in a team.",
-        "summary": "List Channels for Team",
+        "summary": "List Channels",
+        "description": "List all channels in a Team.",
+        "operationId": "ListChannels",
         "tags": ["Channels"],
-        "operationId": "ListTeamChannels",
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ListChannelsforaTeam" }
+            "schema": { "$ref": "#/definitions/ChannelList" }
           }
         }
       }
     },
-    "/teams/{teamID}/channels/{channelID}": {
-      "delete": {
-        "description": "Delete a channel from a team.",
-        "summary": "Delete Channel from Team",
+
+    "/teams/{teamId}/channels/{channelId}": {
+      "get": {
+        "summary": "Get Channel",
+        "description": "Get the properties of a specific channel.",
+        "operationId": "GetChannel",
         "tags": ["Channels"],
-        "operationId": "DeleteTeamChannel",
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "channelID",
+            "name": "channelId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Channel"
           }
         ],
         "responses": {
-          "204": { "description": "Channel deleted" }
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Channel" }
+          }
         }
       },
       "patch": {
-        "description": "Update the channel name and/or description.",
         "summary": "Update Channel",
-        "tags": ["Channels"],
+        "description": "Update the name or description of a channel.",
         "operationId": "UpdateChannel",
+        "tags": ["Channels"],
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "channelID",
+            "name": "channelId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Channel"
           },
           {
-            "name": "Body",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": { "$ref": "#/definitions/UpdateChannelRequest" }
           }
         ],
         "responses": {
-          "204": { "description": "Channel updated" }
+          "204": {
+            "description": "Channel updated successfully"
+          }
         }
-      }
-    },
-    "/teams/{teamID}/channels/{channelID}/messages": {
-      "post": {
-        "description": "Send a new message to a Microsoft Teams channel.",
-        "summary": "Post Message to Channel",
+      },
+      "delete": {
+        "summary": "Delete Channel",
+        "description": "Delete a channel from a Team.",
+        "operationId": "DeleteChannel",
         "tags": ["Channels"],
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Team"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Channel to delete"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Channel deleted successfully"
+          }
+        }
+      }
+    },
+
+    "/teams/{teamId}/channels/{channelId}/messages": {
+      "post": {
+        "summary": "Post Channel Message",
+        "description": "Send a message to a Teams channel.",
         "operationId": "PostChannelMessage",
+        "tags": ["Messages"],
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "channelID",
+            "name": "channelId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Channel"
           },
           {
-            "name": "Body",
+            "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/ChatMessage" }
+            "schema": { "$ref": "#/definitions/MessageRequest" }
           }
         ],
         "responses": {
           "201": {
-            "description": "Message sent",
-            "schema": { "$ref": "#/definitions/ChatMessageResponse" }
+            "description": "Message sent successfully",
+            "schema": { "$ref": "#/definitions/Message" }
           }
         }
-      }
-    },
-    "/teams/{teamID}/channels/{channelID}/tabs": {
+      },
       "get": {
-        "description": "List all the tabs in a team channel.",
-        "summary": "List Tabs for Channel",
-        "tags": ["Tabs"],
-        "operationId": "ListChannelTabs",
+        "summary": "List Channel Messages",
+        "description": "List messages in a Teams channel.",
+        "operationId": "ListChannelMessages",
+        "tags": ["Messages"],
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "channelID",
+            "name": "channelId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Channel"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ListTabsforChannel" }
+            "schema": { "$ref": "#/definitions/MessageList" }
+          }
+        }
+      }
+    },
+
+    "/teams/{teamId}/channels/{channelId}/messages/{messageId}": {
+      "get": {
+        "summary": "Get Channel Message",
+        "description": "Get a specific message from a Teams channel.",
+        "operationId": "GetChannelMessage",
+        "tags": ["Messages"],
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Team"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Channel"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Message"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Message" }
           }
         }
       },
-      "post": {
-        "description": "Add a tab to a channel.",
-        "summary": "Add Tab to Channel",
-        "tags": ["Tabs"],
-        "operationId": "AddTab",
+      "patch": {
+        "summary": "Update Channel Message",
+        "description": "Update the content of an existing channel message.",
+        "operationId": "UpdateChannelMessage",
+        "tags": ["Messages"],
         "parameters": [
           {
-            "name": "teamID",
+            "name": "teamId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Team"
           },
           {
-            "name": "channelID",
+            "name": "channelId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the Channel"
           },
           {
-            "name": "Body",
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Message to update"
+          },
+          {
+            "name": "body",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AddTabtoChannelRequest" }
+            "schema": { "$ref": "#/definitions/MessageRequest" }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Tab added",
-            "schema": { "$ref": "#/definitions/Tab" }
-          }
-        }
-      }
-    },
-    "/teams/{teamID}/channels/{channelID}/tabs/{tabID}": {
-      "get": {
-        "description": "Get a specific tab in a team channel.",
-        "summary": "Get Tab for Channel",
-        "tags": ["Tabs"],
-        "operationId": "GetChannelTab",
-        "parameters": [
-          { "name": "teamID", "in": "path", "required": true, "type": "string" },
-          { "name": "channelID", "in": "path", "required": true, "type": "string" },
-          { "name": "tabID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/Tab" }
-          }
-        }
-      },
-      "delete": {
-        "description": "Remove a tab from a team channel.",
-        "summary": "Delete Tab from Channel",
-        "tags": ["Tabs"],
-        "operationId": "DeleteChannelTab",
-        "parameters": [
-          { "name": "teamID", "in": "path", "required": true, "type": "string" },
-          { "name": "channelID", "in": "path", "required": true, "type": "string" },
-          { "name": "tabID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "204": { "description": "Tab deleted" }
-        }
-      }
-    },
-    "/groups/{teamID}/members/{memberID}/$ref": {
-      "delete": {
-        "description": "Remove a member from a team.",
-        "summary": "Remove Member From Team",
-        "tags": ["Management"],
-        "operationId": "RemoveTeamMember",
-        "parameters": [
-          { "name": "teamID", "in": "path", "required": true, "type": "string" },
-          { "name": "memberID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "204": { "description": "Member removed" }
-        }
-      }
-    },
-    "/groups/{teamID}/owners/{ownerID}/$ref": {
-      "delete": {
-        "description": "Remove an owner from a team.",
-        "summary": "Remove Owner From Team",
-        "tags": ["Management"],
-        "operationId": "RemoveTeamOwner",
-        "parameters": [
-          { "name": "teamID", "in": "path", "required": true, "type": "string" },
-          { "name": "ownerID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "204": { "description": "Owner removed" }
-        }
-      }
-    },
-    "/groups/{groupID}": {
-      "delete": {
-        "description": "Delete a team-enabled group.",
-        "summary": "Delete Group",
-        "tags": ["Management"],
-        "operationId": "DeleteGroup",
-        "parameters": [
-          { "name": "groupID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "204": { "description": "Group deleted" }
-        }
-      }
-    },
-    "/teams/{teamID}/archive": {
-      "post": {
-        "description": "Archive a team.",
-        "summary": "Archive Team",
-        "tags": ["Management"],
-        "operationId": "ArchiveTeam",
-        "parameters": [
-          { "name": "teamID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "202": { "description": "Archive request accepted" }
-        }
-      }
-    },
-    "/teams/{teamID}/operations/{operationID}": {
-      "get": {
-        "description": "Get the status of a team archive or unarchive operation.",
-        "summary": "Check Team Archive Status",
-        "tags": ["Management"],
-        "operationId": "CheckTeamArchiveStatus",
-        "parameters": [
-          { "name": "teamID", "in": "path", "required": true, "type": "string" },
-          { "name": "operationID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/TeamOperation" }
-          }
-        }
-      }
-    },
-    "/teams/{teamID}/unarchive": {
-      "post": {
-        "description": "Unarchive a previously archived team.",
-        "summary": "Unarchive Team",
-        "tags": ["Management"],
-        "operationId": "UnarchiveTeam",
-        "parameters": [
-          { "name": "teamID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "202": { "description": "Unarchive request accepted" }
-        }
-      }
-    },
-    "/directory/deletedItems/{groupID}": {
-      "get": {
-        "description": "Retrieve a previously deleted team-enabled group.",
-        "summary": "Get Deleted Group",
-        "tags": ["Management"],
-        "operationId": "GetDeletedGroup",
-        "parameters": [
-          { "name": "groupID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/CreateGroup" }
-          }
-        }
-      }
-    },
-    "/directory/deletedItems/{groupID}/restore": {
-      "post": {
-        "description": "Restore a previously deleted group.",
-        "summary": "Restore Deleted Group",
-        "tags": ["Management"],
-        "operationId": "RestoreDeletedGroup",
-        "parameters": [
-          { "name": "groupID", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/CreateGroup" }
-          }
-        }
-      }
-    },
-    "/users/{userIDorPrincipalName}": {
-      "get": {
-        "description": "Retrieve a user by ID or principal name.",
-        "summary": "Get User",
-        "tags": ["Management"],
-        "operationId": "GetUser",
-        "parameters": [
-          { "name": "userIDorPrincipalName", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": { "$ref": "#/definitions/TeamMember" }
+          "204": {
+            "description": "Message updated successfully"
           }
         }
       }
     }
+
   },
+
   "definitions": {
-    "ChatMessage": {
-      "type": "object",
-      "required": ["body"],
-      "properties": {
-        "body": { "$ref": "#/definitions/ItemBody" }
-      }
-    },
-    "ItemBody": {
-      "type": "object",
-      "required": ["contentType", "content"],
-      "properties": {
-        "contentType": { "type": "string" },
-        "content": { "type": "string" }
-      }
-    },
-    "ChatMessageResponse": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "messageType": { "type": "string" },
-        "createdDateTime": { "type": "string" },
-        "body": { "$ref": "#/definitions/ItemBody" }
-      }
-    },
-    "OdataIdRequest": {
-      "type": "object",
-      "required": ["odataid"],
-      "properties": {
-        "odataid": { "type": "string" }
-      }
-    },
+
     "CreateGroupRequest": {
       "type": "object",
-      "required": ["description", "displayName", "groupTypes", "mailEnabled", "mailNickname", "securityEnabled"],
+      "required": ["displayName", "mailNickname", "mailEnabled", "securityEnabled", "groupTypes"],
       "properties": {
-        "description": { "type": "string" },
-        "displayName": { "type": "string" },
-        "groupTypes": { "type": "array", "items": { "type": "string" } },
-        "mailEnabled": { "type": "boolean" },
-        "mailNickname": { "type": "string" },
-        "securityEnabled": { "type": "boolean" }
+        "displayName": { "type": "string", "description": "The display name for the Team" },
+        "description": { "type": "string", "description": "A description for the Team" },
+        "mailNickname": { "type": "string", "description": "Mail alias for the group, no spaces" },
+        "mailEnabled": { "type": "boolean", "description": "Must be true for Teams" },
+        "securityEnabled": { "type": "boolean", "description": "Must be false for Teams" },
+        "groupTypes": { "type": "array", "items": { "type": "string" }, "description": "Must include Unified for Teams" },
+        "visibility": { "type": "string", "description": "Public or Private" }
       }
     },
-    "CreateGroup": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "displayName": { "type": "string" },
-        "description": { "type": "string" },
-        "mail": { "type": "string" },
-        "mailEnabled": { "type": "boolean" },
-        "mailNickname": { "type": "string" },
-        "securityEnabled": { "type": "boolean" },
-        "visibility": { "type": "string" },
-        "createdDateTime": { "type": "string" }
-      }
-    },
-    "AddTeamRequest": {
+
+    "ProvisionTeamRequest": {
       "type": "object",
       "properties": {
         "memberSettings": { "$ref": "#/definitions/MemberSettings" },
@@ -674,10 +539,26 @@
         "funSettings": { "$ref": "#/definitions/FunSettings" }
       }
     },
-    "AddTeamtoGroup": {
+
+    "Group": {
       "type": "object",
       "properties": {
         "id": { "type": "string" },
+        "displayName": { "type": "string" },
+        "description": { "type": "string" },
+        "mail": { "type": "string" },
+        "mailNickname": { "type": "string" },
+        "visibility": { "type": "string" },
+        "createdDateTime": { "type": "string" }
+      }
+    },
+
+    "Team": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "displayName": { "type": "string" },
+        "description": { "type": "string" },
         "internalId": { "type": "string" },
         "webUrl": { "type": "string" },
         "isArchived": { "type": "boolean" },
@@ -687,6 +568,7 @@
         "funSettings": { "$ref": "#/definitions/FunSettings" }
       }
     },
+
     "MemberSettings": {
       "type": "object",
       "properties": {
@@ -697,6 +579,7 @@
         "allowCreateUpdateRemoveConnectors": { "type": "boolean" }
       }
     },
+
     "GuestSettings": {
       "type": "object",
       "properties": {
@@ -704,6 +587,7 @@
         "allowDeleteChannels": { "type": "boolean" }
       }
     },
+
     "MessagingSettings": {
       "type": "object",
       "properties": {
@@ -714,6 +598,7 @@
         "allowChannelMentions": { "type": "boolean" }
       }
     },
+
     "FunSettings": {
       "type": "object",
       "properties": {
@@ -723,78 +608,36 @@
         "allowCustomMemes": { "type": "boolean" }
       }
     },
-    "ListofGroups": {
+
+    "DirectoryObjectRef": {
       "type": "object",
+      "required": ["odataid"],
       "properties": {
-        "value": { "type": "array", "items": { "$ref": "#/definitions/Group" } }
+        "odataid": {
+          "type": "string",
+          "description": "Full Graph URL for the user e.g. https://graph.microsoft.com/v1.0/users/{userId}"
+        }
       }
     },
-    "Group": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "resourceProvisioningOptions": { "type": "array", "items": { "type": "string" } }
-      }
-    },
-    "TeamFullDetail": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "internalId": { "type": "string" },
-        "webUrl": { "type": "string" },
-        "isArchived": { "type": "boolean" },
-        "memberSettings": { "$ref": "#/definitions/MemberSettings" },
-        "guestSettings": { "$ref": "#/definitions/GuestSettings" },
-        "messagingSettings": { "$ref": "#/definitions/MessagingSettings" },
-        "funSettings": { "$ref": "#/definitions/FunSettings" }
-      }
-    },
-    "ListTeamMembers": {
-      "type": "object",
-      "properties": {
-        "value": { "type": "array", "items": { "$ref": "#/definitions/TeamMember" } }
-      }
-    },
-    "TeamMemberList": {
-      "type": "object",
-      "properties": {
-        "value": { "type": "array", "items": { "$ref": "#/definitions/TeamMember" } }
-      }
-    },
-    "TeamMember": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "displayName": { "type": "string" },
-        "mail": { "type": "string" },
-        "userPrincipalName": { "type": "string" },
-        "givenName": { "type": "string" },
-        "surname": { "type": "string" }
-      }
-    },
-    "TeamSummaryList": {
-      "type": "object",
-      "properties": {
-        "value": { "type": "array", "items": { "$ref": "#/definitions/TeamSummary" } }
-      }
-    },
-    "TeamSummary": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "displayName": { "type": "string" },
-        "description": { "type": "string" },
-        "isArchived": { "type": "boolean" }
-      }
-    },
-    "AddChannelRequest": {
+
+    "CreateChannelRequest": {
       "type": "object",
       "required": ["displayName"],
       "properties": {
-        "displayName": { "type": "string" },
-        "description": { "type": "string" }
+        "displayName": { "type": "string", "description": "The name of the channel" },
+        "description": { "type": "string", "description": "A description for the channel" },
+        "membershipType": { "type": "string", "description": "standard or private" }
       }
     },
+
+    "UpdateChannelRequest": {
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string", "description": "New name for the channel" },
+        "description": { "type": "string", "description": "New description for the channel" }
+      }
+    },
+
     "Channel": {
       "type": "object",
       "properties": {
@@ -802,53 +645,58 @@
         "displayName": { "type": "string" },
         "description": { "type": "string" },
         "email": { "type": "string" },
-        "webUrl": { "type": "string" }
+        "webUrl": { "type": "string" },
+        "membershipType": { "type": "string" },
+        "createdDateTime": { "type": "string" }
       }
     },
-    "ListChannelsforaTeam": {
+
+    "ChannelList": {
       "type": "object",
       "properties": {
         "value": { "type": "array", "items": { "$ref": "#/definitions/Channel" } }
       }
     },
-    "UpdateChannelRequest": {
+
+    "MessageBody": {
       "type": "object",
+      "required": ["contentType", "content"],
       "properties": {
-        "displayName": { "type": "string" },
-        "description": { "type": "string" }
+        "contentType": { "type": "string", "description": "text or html" },
+        "content": { "type": "string", "description": "The message content" }
       }
     },
-    "ListTabsforChannel": {
+
+    "MessageRequest": {
       "type": "object",
+      "required": ["body"],
       "properties": {
-        "value": { "type": "array", "items": { "$ref": "#/definitions/Tab" } }
+        "body": { "$ref": "#/definitions/MessageBody" },
+        "subject": { "type": "string", "description": "Optional subject line for the message" },
+        "importance": { "type": "string", "description": "normal, high, or urgent" }
       }
     },
-    "Tab": {
+
+    "Message": {
       "type": "object",
       "properties": {
         "id": { "type": "string" },
-        "displayName": { "type": "string" },
-        "webUrl": { "type": "string" }
-      }
-    },
-    "AddTabtoChannelRequest": {
-      "type": "object",
-      "required": ["displayName", "teamsAppId"],
-      "properties": {
-        "displayName": { "type": "string" },
-        "teamsAppId": { "type": "string" }
-      }
-    },
-    "TeamOperation": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "operationType": { "type": "string" },
-        "status": { "type": "string" },
+        "messageType": { "type": "string" },
         "createdDateTime": { "type": "string" },
-        "lastActionDateTime": { "type": "string" }
+        "lastModifiedDateTime": { "type": "string" },
+        "subject": { "type": "string" },
+        "importance": { "type": "string" },
+        "webUrl": { "type": "string" },
+        "body": { "$ref": "#/definitions/MessageBody" }
+      }
+    },
+
+    "MessageList": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "array", "items": { "$ref": "#/definitions/Message" } }
       }
     }
+
   }
 }
