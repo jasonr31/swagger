@@ -6,7 +6,7 @@
     "description": "Manage Microsoft Teams and Channels via Microsoft Graph API. OAuth handled by K2.",
     "contact": {}
   },
-  "host": "httpbin.org",
+  "host": "graph.microsoft.com",
   "basePath": "/v1.0",
   "schemes": ["https"],
   "consumes": ["application/json"],
@@ -15,7 +15,7 @@
 
     "/groups": {
       "post": {
-        "summary": "Create Team",
+        "summary": "Create Group",
         "description": "Creates an Office 365 Group which is the first step in creating a Team.",
         "operationId": "CreateGroup",
         "tags": ["Teams"],
@@ -531,15 +531,6 @@
       }
     },
 
-    "ProvisionTeamRequest": {
-      "type": "object",
-      "properties": {
-        "memberSettings": { "$ref": "#/definitions/MemberSettings" },
-        "messagingSettings": { "$ref": "#/definitions/MessagingSettings" },
-        "funSettings": { "$ref": "#/definitions/FunSettings" }
-      }
-    },
-
     "Group": {
       "type": "object",
       "properties": {
@@ -550,6 +541,15 @@
         "mailNickname": { "type": "string" },
         "visibility": { "type": "string" },
         "createdDateTime": { "type": "string" }
+      }
+    },
+
+    "ProvisionTeamRequest": {
+      "type": "object",
+      "properties": {
+        "memberSettings": { "$ref": "#/definitions/MemberSettings" },
+        "messagingSettings": { "$ref": "#/definitions/MessagingSettings" },
+        "funSettings": { "$ref": "#/definitions/FunSettings" }
       }
     },
 
@@ -624,16 +624,17 @@
       "type": "object",
       "required": ["displayName"],
       "properties": {
-        "displayName": { "type": "string", "description": "The name of the channel" },
-        "description": { "type": "string", "description": "A description for the channel" },
-        "membershipType": { "type": "string", "description": "standard or private" }
+        "displayName": { "type": "string", "description": "Channel name, max 50 characters" },
+        "description": { "type": "string", "description": "Optional description for the channel" },
+        "membershipType": { "type": "string", "description": "standard, private, or shared. Cannot be changed after creation." },
+        "isFavoriteByDefault": { "type": "boolean", "description": "Show channel in all members channel list by default" }
       }
     },
 
     "UpdateChannelRequest": {
       "type": "object",
       "properties": {
-        "displayName": { "type": "string", "description": "New name for the channel" },
+        "displayName": { "type": "string", "description": "New name for the channel, max 50 characters" },
         "description": { "type": "string", "description": "New description for the channel" }
       }
     },
@@ -646,7 +647,10 @@
         "description": { "type": "string" },
         "email": { "type": "string" },
         "webUrl": { "type": "string" },
-        "membershipType": { "type": "string" },
+        "membershipType": { "type": "string", "description": "standard, private, or shared" },
+        "isArchived": { "type": "boolean" },
+        "isFavoriteByDefault": { "type": "boolean" },
+        "tenantId": { "type": "string" },
         "createdDateTime": { "type": "string" }
       }
     },
@@ -684,8 +688,10 @@
         "messageType": { "type": "string" },
         "createdDateTime": { "type": "string" },
         "lastModifiedDateTime": { "type": "string" },
+        "lastEditedDateTime": { "type": "string" },
         "subject": { "type": "string" },
         "importance": { "type": "string" },
+        "locale": { "type": "string" },
         "webUrl": { "type": "string" },
         "body": { "$ref": "#/definitions/MessageBody" }
       }
